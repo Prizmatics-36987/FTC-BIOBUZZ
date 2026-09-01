@@ -14,7 +14,7 @@ import com.pedropathing.paths.PathChain;
 public class A_ThreeByThree extends OpMode {
     private Follower follower;
     private PathChain path1, path2;
-    private int pathState;
+    private State pathState;
     private final ElapsedTime actionTimer = new ElapsedTime();
 
     //poses
@@ -31,7 +31,7 @@ public class A_ThreeByThree extends OpMode {
 
     @Override
     public void start() {
-        setPathState(0);
+        setPathState(State.READY);
     }
 
     @Override
@@ -56,38 +56,33 @@ public class A_ThreeByThree extends OpMode {
 
     private void autonomousPathUpdate() {
         switch (pathState) {
-            case 0: // start first path
+            case READY: // start first path
                 follower.followPath(path1);
-                setPathState(1);
+                setPathState(State.SHOOT);
                 break;
-            case 1: // do thing
+            case SHOOT: // do thing
                 if (!follower.isBusy()) {
                     startAction();
-                    setPathState(2);
+                    setPathState(State.BACK);
                 }
                 break;
-            case 2: // timer to let it run
+            case BACK: // timer to let it run
                 if (actionTimer.seconds() > 1.5) {
                     stopAction();
-                    setPathState(3);
+                    setPathState(State.DONE);
                 }
                 break;
-            case 3: // start second path
+            case DONE: // start second path
                 follower.followPath(path2);
-                setPathState(4);
+                setPathState(State.FINISH);
                 break;
-            case 4: // wait for path2 to finish
-                if (!follower.isBusy()) {
-                    setPathState(-1);
-                }
-                break;
-            case -1:
+            case FINISH:
                 // brake
                 break;
         }
     }
 
-    private void setPathState(int state) {
+    private void setPathState(State state) {
         pathState = state;
         actionTimer.reset();
     }
