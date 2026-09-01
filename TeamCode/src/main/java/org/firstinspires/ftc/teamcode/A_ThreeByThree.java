@@ -1,90 +1,100 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
-import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.follower.Follower;
-import com.pedropathing.paths.PathChain;
+import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
+import com.pedropathing.paths.PathChain;
 
 @Autonomous(name = "A_ThreeByThree", group = "Autonomous")
 public class A_ThreeByThree extends OpMode {
-    public Follower follower; // Pedro Pathing follower instance
-    private String pathState; // Current autonomous path state (state machine)
-    private Paths paths; // Paths defined in the Paths class
+    private Follower follower;
+    private PathChain path1, path2;
+    private int pathState;
+    private final ElapsedTime actionTimer = new ElapsedTime();
+
+    //poses
+    private final Pose startPose = new Pose(8, 8, Math.toRadians(90));
+    private final Pose midPose   = new Pose(50, 50, Math.toRadians(90));
+    private final Pose endPose   = new Pose(8, 8, Math.toRadians(90));
 
     @Override
     public void init() {
         follower = Constants.createFollower(hardwareMap);
-        follower.setStartingPose(new Pose(8, 8, Math.toRadians(90)));
+        follower.setStartingPose(startPose);
+        buildPaths();
+    }
 
-        paths = new Paths(follower); // Build paths
-        pathState = "READY";
+    @Override
+    public void start() {
+        setPathState(0);
     }
 
     @Override
     public void loop() {
-        follower.update(); // Update Pedro Pathing
-
-        pathState = autonomousPathUpdate(); // Update autonomous state machine
-
-        telemetry.addData("pathState", pathState);
+        follower.update();
+        autonomousPathUpdate();
+        telemetry.addData("Path State", pathState);
+        telemetry.addData("Pose", follower.getPose());
         telemetry.update();
     }
 
-    public static class Paths {
-        public PathChain ShootPath;
-        public PathChain DonePath;
+    private void buildPaths() {
+        path1 = follower.pathBuilder()
+                .addPath(new BezierLine(startPose, midPose))
+                .setLinearHeadingInterpolation(startPose.getHeading(), midPose.getHeading())
+                .build();
+        path2 = follower.pathBuilder()
+                .addPath(new BezierLine(midPose, endPose))
+                .setLinearHeadingInterpolation(midPose.getHeading(), endPose.getHeading())
+                .build();
+    }
 
-        public Paths(Follower follower) {
-            ShootPath = follower.pathBuilder()
-                    .addPath(
-                            new BezierLine(
-                                    new Pose(8.000, 8.000),
-                                    new Pose(50.000, 50.000)
-                            )
-                    )
-                    .setLinearHeadingInterpolation(Math.toRadians(90), Math.toRadians(180))
-                    .build();
-
-            DonePath = follower.pathBuilder()
-                    .addPath(
-                            new BezierLine(
-                                    new Pose(50.000, 50.000),
-                                    new Pose(30.000, 30.000)
-                            )
-                    )
-                    .setLinearHeadingInterpolation(Math.toRadians(180), Math.toRadians(90))
-                    .build();
-
+    private void autonomousPathUpdate() {
+        switch (pathState) {
+            case 0: // start first path
+                follower.followPath(path1);
+                setPathState(1);
+                break;
+            case 1: // do thing
+                if (!follower.isBusy()) {
+                    startAction();
+                    setPathState(2);
+                }
+                break;
+            case 2: // timer to let it run
+                if (actionTimer.seconds() > 1.5) {
+                    stopAction();
+                    setPathState(3);
+                }
+                break;
+            case 3: // start second path
+                follower.followPath(path2);
+                setPathState(4);
+                break;
+            case 4: // wait for path2 to finish
+                if (!follower.isBusy()) {
+                    setPathState(-1);
+                }
+                break;
+            case -1:
+                // brake
+                break;
         }
     }
 
-    public String autonomousPathUpdate() {
-            switch (pathState) {
-                case "READY":
-                    if (!follower.isBusy()) {
-                        follower.followPath(paths.ShootPath);
-                        return "SHOOT";
-                    }
-                    break;
-                case "SHOOT":
-                    if (!follower.isBusy()) {
-//                        TimeUnit.MILLISECONDS.sleep(500);
-                        return "BACK";
-                    }
-                    break;
-                case "BACK":
-                    if (!follower.isBusy()) {
-                        follower.followPath(paths.DonePath);
-                        return "DONE";
-                    }
-                    break;
-                case "DONE":
-                    return "DONE";
-            }
+    private void setPathState(int state) {
+        pathState = state;
+        actionTimer.reset();
+    }
 
-        return "READY";
+    private void startAction() {
+    }
+
+    private void stopAction() {
     }
 }
