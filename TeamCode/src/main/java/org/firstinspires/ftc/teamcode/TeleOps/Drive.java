@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.SubSystems.DriveTrain;
 public class Drive extends OpMode {
     @Override
     public void init() {
-        InitMethods.initDriveTrain();
+        InitMethods.initOpModeDrive();
     }
 
     @Override

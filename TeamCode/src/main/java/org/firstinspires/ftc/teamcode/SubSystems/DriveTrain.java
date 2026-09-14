@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.SubSystems;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
+
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
 import com.qualcomm.robotcore.hardware.Gamepad;
@@ -15,7 +17,7 @@ public class DriveTrain extends SubsystemBase {
     private static Follower follower = null;
     public static Pose startingPose;
     private static double slowMultiplier = 0.5;
-    private static final Gamepad gp1 = robot.gamepad1;
+    private static final Gamepad gp1 = gamepad1;
 
     public DriveTrain() {
         super();
