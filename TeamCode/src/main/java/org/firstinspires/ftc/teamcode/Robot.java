@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.SubSystems.DriveTrain;
+import org.firstinspires.ftc.teamcode.SubSystems.ManualDrive;
 import org.firstinspires.ftc.teamcode.SubSystems.Intake;
 
 public class Robot {
@@ -10,7 +10,7 @@ public class Robot {
 
     public HardwareMap hw;
 
-    public DriveTrain DriveTrain;
+    public ManualDrive ManualDrive;
     public Intake Intake;
 
     public static synchronized Robot getInstance() {

@@ -11,15 +11,15 @@ import com.seattlesolvers.solverslib.command.SubsystemBase;
 import org.firstinspires.ftc.teamcode.Robot;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
-public class DriveTrain extends SubsystemBase {
+public class ManualDrive extends SubsystemBase {
     static Robot robot = Robot.getInstance();
 
-    private static Follower follower = null;
+    private static Follower follower;
     public static Pose startingPose;
     private static double slowMultiplier = 0.5;
     private static final Gamepad gp1 = gamepad1;
 
-    public DriveTrain() {
+    public ManualDrive() {
         super();
 
         HardwareMap hw = robot.hw;
