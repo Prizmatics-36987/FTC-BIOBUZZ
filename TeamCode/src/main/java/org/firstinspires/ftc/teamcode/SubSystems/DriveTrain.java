@@ -10,12 +10,12 @@ import org.firstinspires.ftc.teamcode.Robot;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 public class DriveTrain extends SubsystemBase {
-    Robot robot = Robot.getInstance();
+    static Robot robot = Robot.getInstance();
 
-    private final Follower follower;
+    private static Follower follower = null;
     public static Pose startingPose;
-    private double slowMultiplier = 0.5;
-    private final Gamepad gp1 = robot.Systems.gamepad1;
+    private static double slowMultiplier = 0.5;
+    private static final Gamepad gp1 = robot.Systems.gamepad1;
 
     public DriveTrain() {
         super();
@@ -27,7 +27,7 @@ public class DriveTrain extends SubsystemBase {
         follower.startTeleopDrive();
     }
 
-    public void drive() {
+    public static void drive() {
         follower.update();
 
         follower.setTeleOpDrive(
@@ -37,12 +37,18 @@ public class DriveTrain extends SubsystemBase {
                 false // robot centric
         );
 
+        // Movement Speed
         if (gp1.leftBumperWasPressed()) {
             slowMultiplier += 0.25;
+        } else if (gp1.rightBumperWasPressed()) {
+            slowMultiplier -= 0.25;
         }
 
-        if (gp1.rightBumperWasPressed()) {
-            slowMultiplier -= 0.25;
+        // Intake
+        if (gp1.dpad_up) {
+            Intake.activate(1);
+        } else if (gp1.dpad_down) {
+            Intake.activate(-1);
         }
     }
 }

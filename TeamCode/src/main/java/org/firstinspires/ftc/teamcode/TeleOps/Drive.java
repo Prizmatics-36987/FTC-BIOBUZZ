@@ -1,19 +1,20 @@
 package org.firstinspires.ftc.teamcode.TeleOps;
 
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.seattlesolvers.solverslib.command.CommandOpMode;
 
 import org.firstinspires.ftc.teamcode.InitMethods;
+import org.firstinspires.ftc.teamcode.SubSystems.DriveTrain;
 
 @TeleOp(name="Drive", group="Linear OpMode")
-public class Drive extends CommandOpMode {
+public class Drive extends OpMode {
     @Override
-    public void initialize() {
+    public void init() {
         InitMethods.initDriveTrain();
     }
 
     @Override
-    public void run() {
-        super.run();
+    public void loop() {
+        DriveTrain.drive();
     }
 }

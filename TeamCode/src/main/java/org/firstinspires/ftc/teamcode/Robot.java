@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -14,11 +15,7 @@ public class Robot {
         return instance;
     }
 
-    public synchronized void resetRobot() {
-        instance = null;
-    }
-
-    public void init(Gamepad gamepad1, HardwareMap hw) {
-        Systems = new Systems(gamepad1, hw);
+    public void init(Gamepad gamepad1, HardwareMap hw, DcMotor intake) {
+        Systems = new Systems(gamepad1, hw, intake);
     }
 }
