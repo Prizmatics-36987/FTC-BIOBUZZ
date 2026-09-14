@@ -15,12 +15,12 @@ public class DriveTrain extends SubsystemBase {
     private static Follower follower = null;
     public static Pose startingPose;
     private static double slowMultiplier = 0.5;
-    private static final Gamepad gp1 = robot.Systems.gamepad1;
+    private static final Gamepad gp1 = robot.gamepad1;
 
     public DriveTrain() {
         super();
 
-        HardwareMap hw = robot.Systems.hw;
+        HardwareMap hw = robot.hw;
         follower = Constants.createFollower(hw);
         follower.setStartingPose(startingPose == null ? new Pose() : startingPose);
         follower.update();

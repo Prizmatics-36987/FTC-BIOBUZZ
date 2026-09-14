@@ -11,7 +11,7 @@ public class Intake extends SubsystemBase {
     private static DcMotor motor;
 
     Intake() {
-        motor = robot.Systems.hw.dcMotor.get("intake");
+        motor = robot.hw.dcMotor.get("intake");
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
