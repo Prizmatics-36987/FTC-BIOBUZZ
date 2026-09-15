@@ -15,6 +15,6 @@ public class Drive extends OpMode {
 
     @Override
     public void loop() {
-        ManualDrive.drive();
+        ManualDrive.drive(true);
     }
 }

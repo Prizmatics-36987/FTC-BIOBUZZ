@@ -15,8 +15,7 @@ public class ManualDrive extends SubsystemBase {
     static Robot robot = Robot.getInstance();
 
     private static Follower follower;
-    public static Pose startingPose;
-    private static double slowMultiplier = 0.5;
+    private static double movementMultiplier = 0.5;
     private static final Gamepad gp1 = gamepad1;
 
     public ManualDrive() {
@@ -24,26 +23,26 @@ public class ManualDrive extends SubsystemBase {
 
         HardwareMap hw = robot.hw;
         follower = Constants.createFollower(hw);
-        follower.setStartingPose(startingPose == null ? new Pose() : startingPose);
+        follower.setStartingPose(new Pose());
         follower.update();
         follower.startTeleopDrive();
     }
 
-    public static void drive() {
+    public static void drive(boolean fieldCentric) {
         follower.update();
 
         follower.setTeleOpDrive(
-                -gp1.left_stick_y * slowMultiplier,
-                -gp1.left_stick_x * slowMultiplier,
-                -gp1.right_stick_x * slowMultiplier,
-                false // robot centric
+                -gp1.left_stick_y * movementMultiplier,
+                -gp1.left_stick_x * movementMultiplier,
+                -gp1.right_stick_x * movementMultiplier,
+                !fieldCentric
         );
 
         // Movement Speed
         if (gp1.leftBumperWasPressed()) {
-            slowMultiplier += 0.25;
+            movementMultiplier += 0.25;
         } else if (gp1.rightBumperWasPressed()) {
-            slowMultiplier -= 0.25;
+            movementMultiplier -= 0.25;
         }
 
         // Intake
