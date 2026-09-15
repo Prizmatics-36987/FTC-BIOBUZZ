@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.Robot;
+import org.firstinspires.ftc.teamcode.SubSystems.Intake;
 import org.firstinspires.ftc.teamcode.Utils.InitMethods;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
@@ -22,7 +23,6 @@ public class AutoTest extends OpMode {
     private final Pose startPose = new Pose(0, 0, Math.toRadians(90));
     private final Pose topPose = new Pose(40, 40, Math.toRadians(180));
     private final Pose downPose = new Pose(40, 10, Math.toRadians(0));
-    private final Pose endPose = new Pose(0, 0, Math.toRadians(90));
 
     @Override
     public void init() {
@@ -42,8 +42,8 @@ public class AutoTest extends OpMode {
                 .setLinearHeadingInterpolation(startPose.getHeading(), topPose.getHeading())
                 .addPath(new BezierLine(topPose, downPose))
                 .setTangentHeadingInterpolation()
-                .addPath(new BezierLine(downPose, endPose))
-                .setConstantHeadingInterpolation(endPose.getHeading())
+                .addPath(new BezierLine(downPose, startPose))
+                .setConstantHeadingInterpolation(startPose.getHeading())
                 .build();
 
         follower.followPath(path);
@@ -55,6 +55,10 @@ public class AutoTest extends OpMode {
 
         if (!follower.isBusy()) {
             follower.followPath(path, true);
+        }
+
+        if (!Intake.is_active()) {
+            Intake.activate(1);
         }
     }
 }

@@ -15,7 +15,11 @@ public class Intake extends SubsystemBase {
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
-    static void activate(double power) {
+    public static void activate(double power) {
         motor.setPower(power);
+    }
+
+    public static boolean is_active() {
+        return motor.getPower() != 0;
     }
 }
