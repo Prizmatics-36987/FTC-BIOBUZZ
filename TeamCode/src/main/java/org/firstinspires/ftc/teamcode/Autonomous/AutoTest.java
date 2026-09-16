@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Autonomous;
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.BezierLine;
@@ -6,13 +6,17 @@ import com.pedropathing.geometry.Pose;
 import com.pedropathing.paths.PathChain;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.teamcode.Robot;
+import org.firstinspires.ftc.teamcode.Utils.InitMethods;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
-@Autonomous(name="A_PPTest", group="Linear OpMode")
-public class A_PPTest extends OpMode {
-    public static Follower follower;
+@Autonomous(name="AutoTest", group="Linear OpMode")
+public class AutoTest extends OpMode {
+    static Robot robot = Robot.getInstance();
 
+    public static Follower follower;
     private PathChain path;
 
     private final Pose startPose = new Pose(0, 0, Math.toRadians(90));
@@ -22,7 +26,10 @@ public class A_PPTest extends OpMode {
 
     @Override
     public void init() {
-        follower = Constants.createFollower(hardwareMap);
+        InitMethods.initAutoTest();
+
+        HardwareMap hw = robot.hw;
+        follower = Constants.createFollower(hw);
         follower.setStartingPose(new Pose());
     }
 
