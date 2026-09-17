@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Utils;
 
 import org.firstinspires.ftc.teamcode.Robot;
+import org.firstinspires.ftc.teamcode.SubSystems.AprilTag;
 import org.firstinspires.ftc.teamcode.SubSystems.ManualDrive;
 import org.firstinspires.ftc.teamcode.SubSystems.Intake;
 
@@ -14,5 +15,9 @@ public class InitMethods {
 
     public static void initAutoTest() {
         robot.Intake = new Intake();
+    }
+
+    public static void initAprilTagTest() {
+        robot.AprilTag = new AprilTag();
     }
 }
