@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.SubSystems.Intake;
 public class InitMethods {
     static Robot robot = Robot.getInstance();
 
-    public static void initOpModeDrive() {
+    public static void initTeleOp() {
         robot.ManualDrive = new ManualDrive();
         robot.Intake = new Intake();
     }

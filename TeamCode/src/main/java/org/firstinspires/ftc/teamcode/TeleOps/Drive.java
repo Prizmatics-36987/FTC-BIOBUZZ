@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.SubSystems.ManualDrive;
 public class Drive extends OpMode {
     @Override
     public void init() {
-        InitMethods.initOpModeDrive();
+        InitMethods.initTeleOp();
     }
 
     @Override
