@@ -25,8 +25,6 @@ public class A_Test extends OpMode {
 
     @Override
     public void init() {
-        Robot.initAutoTest();
-
         HardwareMap hw = robot.hw;
         follower = Constants.createFollower(hw);
         follower.setStartingPose(new Pose());

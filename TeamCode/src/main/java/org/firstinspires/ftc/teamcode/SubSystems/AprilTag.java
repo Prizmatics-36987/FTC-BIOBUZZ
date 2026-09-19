@@ -5,8 +5,6 @@ import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.tel
 import android.annotation.SuppressLint;
 import android.util.Size;
 
-import com.seattlesolvers.solverslib.command.SubsystemBase;
-
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
@@ -18,7 +16,7 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AprilTag extends SubsystemBase {
+public class AprilTag {
     Robot robot = Robot.getInstance();
 
     private static AprilTagProcessor aprilTag;

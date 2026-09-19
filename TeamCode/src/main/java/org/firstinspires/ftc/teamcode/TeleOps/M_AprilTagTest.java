@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
-import org.firstinspires.ftc.teamcode.Robot;
 import org.firstinspires.ftc.teamcode.SubSystems.AprilTag;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 
@@ -15,9 +14,7 @@ public class M_AprilTagTest extends OpMode {
     private final Gamepad gp1 = gamepad1;
 
     @Override
-    public void init() {
-        Robot.initAprilTagTest();
-    }
+    public void init() {}
 
     @SuppressLint("DefaultLocale")
     @Override
