@@ -11,7 +11,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
+import org.firstinspires.ftc.vision.apriltag.AprilTagGameDatabase;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
+import org.firstinspires.ftc.vision.apriltag.AprilTagSingleDetection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +31,7 @@ public class AprilTag {
                 .setDrawAxes(true)
                 .setDrawCubeProjection(true)
                 .setOutputUnits(DistanceUnit.CM, AngleUnit.DEGREES)
-                //.setTagLibrary(AprilTagGameDatabase.getCenterStageTagLibrary())
+                .setTagLibrary(AprilTagGameDatabase.getBioBuzzTagLibrary())
                 //.setLensIntrinsics(578.272, 578.272, 402.145, 221.506)
                 // ... these parameters are fx, fy, cx, cy.
                 .build();
@@ -44,7 +46,7 @@ public class AprilTag {
     }
 
     @SuppressLint("DefaultLocale")
-    public static void displayDetectionTelemetry(AprilTagDetection detectedID) {
+    public static void displayDetectionTelemetry(AprilTagSingleDetection detectedID) {
         if (detectedID == null) {return;}
         if (detectedID.metadata != null) {
             telemetry.addLine(String.format("\n==== (ID %d) %s", detectedID.id, detectedID.metadata.name));
@@ -61,8 +63,12 @@ public class AprilTag {
         update();
 
         for (AprilTagDetection det : currentDetections) {
-            if (det.id == ID) {
-                return det;
+            if (det instanceof AprilTagSingleDetection) {
+                if (((AprilTagSingleDetection) det).id == ID) {
+                    return det;
+                } else {
+                    return null; // TODO: Add AprilTagClusterDetection logic
+                }
             }
         }
 
