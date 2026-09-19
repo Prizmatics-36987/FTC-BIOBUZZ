@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.Utils.InitMethods;
 import org.firstinspires.ftc.teamcode.SubSystems.ManualDrive;
 
 @TeleOp(name="Drive", group="Linear OpMode")
-public class Drive extends OpMode {
+public class M_Drive extends OpMode {
     @Override
     public void init() {
         InitMethods.initTeleOpDrive();

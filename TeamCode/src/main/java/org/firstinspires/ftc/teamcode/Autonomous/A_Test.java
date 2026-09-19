@@ -13,8 +13,8 @@ import org.firstinspires.ftc.teamcode.SubSystems.Intake;
 import org.firstinspires.ftc.teamcode.Utils.InitMethods;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
-@Autonomous(name="AutoTest", group="Linear OpMode")
-public class AutoTest extends OpMode {
+@Autonomous(name="Test", group="Linear OpMode")
+public class A_Test extends OpMode {
     static Robot robot = Robot.getInstance();
 
     public static Follower follower;

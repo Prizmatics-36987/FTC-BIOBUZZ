@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.Utils.InitMethods;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 
 @TeleOp(name="AprilTagTest", group="Linear OpMode")
-public class AprilTagTest extends OpMode {
+public class M_AprilTagTest extends OpMode {
     private final Gamepad gp1 = gamepad1;
 
     @Override
