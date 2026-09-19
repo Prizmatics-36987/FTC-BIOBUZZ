@@ -1,16 +1,14 @@
 package org.firstinspires.ftc.teamcode.SubSystems;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.Robot;
-
 public class Intake {
-    Robot robot = Robot.getInstance();
-
     private static DcMotor motor;
 
     public Intake() {
-        motor = robot.hw.dcMotor.get("intake");
+        motor = hardwareMap.dcMotor.get("intake");
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 

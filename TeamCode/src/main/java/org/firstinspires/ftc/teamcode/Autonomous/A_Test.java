@@ -6,16 +6,12 @@ import com.pedropathing.geometry.Pose;
 import com.pedropathing.paths.PathChain;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.Robot;
 import org.firstinspires.ftc.teamcode.SubSystems.Intake;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 @Autonomous(name="Test", group="Linear OpMode")
 public class A_Test extends OpMode {
-    static Robot robot = Robot.getInstance();
-
     public static Follower follower;
     private PathChain path;
 
@@ -25,8 +21,7 @@ public class A_Test extends OpMode {
 
     @Override
     public void init() {
-        HardwareMap hw = robot.hw;
-        follower = Constants.createFollower(hw);
+        follower = Constants.createFollower(hardwareMap);
         follower.setStartingPose(new Pose());
     }
 

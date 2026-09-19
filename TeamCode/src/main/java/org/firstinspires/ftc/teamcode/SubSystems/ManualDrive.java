@@ -1,27 +1,20 @@
 package org.firstinspires.ftc.teamcode.SubSystems;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-
-import org.firstinspires.ftc.teamcode.Robot;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 public class ManualDrive {
-    static Robot robot = Robot.getInstance();
-
     private static Follower follower;
     private static double movementMultiplier = 0.5;
     private static final Gamepad gp1 = gamepad1;
 
     public ManualDrive() {
-        super();
-
-        HardwareMap hw = robot.hw;
-        follower = Constants.createFollower(hw);
+        follower = Constants.createFollower(hardwareMap);
         follower.setStartingPose(new Pose());
         follower.update();
         follower.startTeleopDrive();

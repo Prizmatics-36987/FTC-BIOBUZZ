@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.SubSystems;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
 import android.annotation.SuppressLint;
@@ -8,7 +9,6 @@ import android.util.Size;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.teamcode.Robot;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AprilTag {
-    Robot robot = Robot.getInstance();
-
     private static AprilTagProcessor aprilTag;
     private static VisionPortal visionPortal;
 
@@ -37,7 +35,7 @@ public class AprilTag {
                 .build();
 
         VisionPortal.Builder builder = new VisionPortal.Builder();
-        builder.setCamera(robot.hw.get(WebcamName.class, "Webcam 1"));
+        builder.setCamera(hardwareMap.get(WebcamName.class, "Webcam 1"));
         builder.setCameraResolution(new Size(640, 480));
         builder.addProcessor(aprilTag);
 
