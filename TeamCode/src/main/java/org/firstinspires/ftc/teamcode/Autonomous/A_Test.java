@@ -10,7 +10,6 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.Robot;
 import org.firstinspires.ftc.teamcode.SubSystems.Intake;
-import org.firstinspires.ftc.teamcode.Utils.InitMethods;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 @Autonomous(name="Test", group="Linear OpMode")
@@ -26,7 +25,7 @@ public class A_Test extends OpMode {
 
     @Override
     public void init() {
-        InitMethods.initAutoTest();
+        Robot.initAutoTest();
 
         HardwareMap hw = robot.hw;
         follower = Constants.createFollower(hw);

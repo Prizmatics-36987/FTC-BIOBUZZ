@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.firstinspires.ftc.teamcode.Robot;
 import org.firstinspires.ftc.teamcode.SubSystems.AprilTag;
-import org.firstinspires.ftc.teamcode.Utils.InitMethods;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 
 @TeleOp(name="AprilTagTest", group="Linear OpMode")
@@ -16,7 +16,7 @@ public class M_AprilTagTest extends OpMode {
 
     @Override
     public void init() {
-        InitMethods.initAprilTagTest();
+        Robot.initAprilTagTest();
     }
 
     @SuppressLint("DefaultLocale")

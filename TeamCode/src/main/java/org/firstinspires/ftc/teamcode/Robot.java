@@ -11,14 +11,27 @@ public class Robot {
 
     public HardwareMap hw;
 
-    public ManualDrive ManualDrive;
-    public Intake Intake;
-    public AprilTag AprilTag;
+    public static ManualDrive ManualDrive;
+    public static Intake Intake;
+    public static AprilTag AprilTag;
 
     public static synchronized Robot getInstance() {
         if (instance == null) {
             instance = new Robot();
         }
         return instance;
+    }
+
+    public static void initTeleOpDrive() {
+        ManualDrive = new ManualDrive();
+        Intake = new Intake();
+    }
+
+    public static void initAutoTest() {
+        Intake = new Intake();
+    }
+
+    public static void initAprilTagTest() {
+        AprilTag = new AprilTag();
     }
 }
