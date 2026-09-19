@@ -80,5 +80,3 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 /gradle/gradle-daemon-jvm.properties
-/FtcRobotController/
-/FtcRobotController/
