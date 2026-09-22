@@ -6,12 +6,16 @@ import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.har
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.Pose;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.seattlesolvers.solverslib.command.SubsystemBase;
+
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
-public class ManualDrive {
-    private static Follower follower;
-    private static double movementMultiplier = 0.5;
-    private static final Gamepad gp1 = gamepad1;
+public class ManualDrive extends SubsystemBase {
+    private final Follower follower;
+    private double movementMultiplier = 0.5;
+    private final Gamepad gp1 = gamepad1;
+
+    Intake intake = new Intake();
 
     public ManualDrive() {
         follower = Constants.createFollower(hardwareMap);
@@ -20,7 +24,7 @@ public class ManualDrive {
         follower.startTeleopDrive();
     }
 
-    public static void drive(boolean fieldCentric) {
+    public void drive(boolean fieldCentric) {
         follower.update();
 
         follower.setTeleOpDrive(
@@ -39,9 +43,9 @@ public class ManualDrive {
 
         // Intake
         if (gp1.dpad_up) {
-            Intake.activate(1);
+            intake.setPower(1);
         } else if (gp1.dpad_down) {
-            Intake.activate(-1);
+            intake.setPower(-1);
         }
     }
 }

@@ -19,6 +19,8 @@ public class A_Test extends OpMode {
     private final Pose topPose = new Pose(40, 40, Math.toRadians(180));
     private final Pose downPose = new Pose(40, 10, Math.toRadians(0));
 
+    Intake intake = new Intake();
+
     @Override
     public void init() {
         follower = Constants.createFollower(hardwareMap);
@@ -49,8 +51,8 @@ public class A_Test extends OpMode {
             follower.followPath(path, true);
         }
 
-        if (!Intake.is_active()) {
-            Intake.activate(1);
+        if (!intake.is_active()) {
+            intake.setPower(1);
         }
     }
 }

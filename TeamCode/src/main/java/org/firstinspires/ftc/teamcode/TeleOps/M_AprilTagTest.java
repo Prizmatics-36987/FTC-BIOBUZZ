@@ -14,8 +14,12 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagSingleDetection;
 public class M_AprilTagTest extends OpMode {
     private final Gamepad gp1 = gamepad1;
 
+    AprilTag april;
+
     @Override
-    public void init() {}
+    public void init() {
+        april = new AprilTag();
+    }
 
     @SuppressLint("DefaultLocale")
     @Override
@@ -23,8 +27,8 @@ public class M_AprilTagTest extends OpMode {
         telemetry.update();
 
         if (gp1.bWasPressed()) {
-            AprilTagDetection id20 = AprilTag.getByID(20);
-            AprilTag.displayDetectionTelemetry((AprilTagSingleDetection) id20);
+            AprilTagDetection id20 = april.getByID(20);
+            april.displayDetectionTelemetry((AprilTagSingleDetection) id20);
         }
     }
 }

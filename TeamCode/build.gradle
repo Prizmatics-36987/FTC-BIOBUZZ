@@ -31,4 +31,12 @@ repositories {
 
 dependencies {
     implementation project(':FtcRobotController')
+
+    implementation "org.solverslib:core:0.3.6" // core
+//    implementation "org.solverslib:pedroPathing:0.3.6" // pedroPathing
+}
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }

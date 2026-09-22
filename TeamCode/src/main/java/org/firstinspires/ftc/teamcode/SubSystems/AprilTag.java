@@ -6,6 +6,8 @@ import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.tel
 import android.annotation.SuppressLint;
 import android.util.Size;
 
+import com.seattlesolvers.solverslib.command.SubsystemBase;
+
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
@@ -18,11 +20,11 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagSingleDetection;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AprilTag {
-    private static AprilTagProcessor aprilTag;
-    private static VisionPortal visionPortal;
+public class AprilTag extends SubsystemBase {
+    private final AprilTagProcessor aprilTag;
+    private final VisionPortal visionPortal;
 
-    static List<AprilTagDetection> currentDetections = new ArrayList<>();
+    List<AprilTagDetection> currentDetections = new ArrayList<>();
 
     public AprilTag() {
         aprilTag = new AprilTagProcessor.Builder()
@@ -46,7 +48,7 @@ public class AprilTag {
     }
 
     @SuppressLint("DefaultLocale")
-    public static void displayDetectionTelemetry(AprilTagSingleDetection detectedID) {
+    public void displayDetectionTelemetry(AprilTagSingleDetection detectedID) {
         if (detectedID == null) {return;}
         if (detectedID.metadata != null) {
             telemetry.addLine(String.format("\n==== (ID %d) %s", detectedID.id, detectedID.metadata.name));
@@ -59,7 +61,7 @@ public class AprilTag {
         }
     }
 
-    public static AprilTagDetection getByID(int ID) {
+    public AprilTagDetection getByID(int ID) {
         update();
 
         for (AprilTagDetection det : currentDetections) {
@@ -75,13 +77,13 @@ public class AprilTag {
         return null;
     }
 
-    public static void stop() {
+    public void stop() {
         if (visionPortal != null) {
             visionPortal.close();
         }
     }
 
-    private static void update() {
+    private void update() {
         currentDetections = aprilTag.getDetections();
     }
 }
