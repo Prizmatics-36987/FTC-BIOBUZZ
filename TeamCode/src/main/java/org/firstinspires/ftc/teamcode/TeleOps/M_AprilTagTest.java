@@ -7,7 +7,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.SubSystems.AprilTag;
-import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagSingleDetection;
 
 @TeleOp(name="AprilTagTest", group="Linear OpMode")
@@ -27,8 +26,8 @@ public class M_AprilTagTest extends OpMode {
         telemetry.update();
 
         if (gp1.bWasPressed()) {
-            AprilTagDetection id20 = april.getByID(20);
-            april.displayDetectionTelemetry((AprilTagSingleDetection) id20);
+            AprilTagSingleDetection id20 = (AprilTagSingleDetection) april.getByID(20);
+            april.displayDetectionTelemetry(id20);
         }
     }
 }

@@ -1,3 +1,5 @@
+apply plugin: 'com.android.application'
+
 //
 // build.gradle in TeamCode
 //
@@ -7,7 +9,6 @@
 // the build definitions, you can place those customizations in this file, but
 // please think carefully as to whether such customizations are really necessary
 // before doing so.
-
 
 // Custom definitions may go here
 
@@ -31,12 +32,5 @@ repositories {
 
 dependencies {
     implementation project(':FtcRobotController')
-
     implementation "org.solverslib:core:0.3.6" // core
-//    implementation "org.solverslib:pedroPathing:0.3.6" // pedroPathing
-}
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
 }
