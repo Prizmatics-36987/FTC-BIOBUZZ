@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import org.firstinspires.ftc.teamcode.SubSystems.AprilTag;
 import org.firstinspires.ftc.vision.apriltag.AprilTagSingleDetection;
 
-@TeleOp(name="AprilTagTest", group="Linear OpMode")
+@TeleOp(name="M_AprilTagTest", group="Linear OpMode")
 public class M_AprilTagTest extends OpMode {
     private final Gamepad gp1 = gamepad1;
 
