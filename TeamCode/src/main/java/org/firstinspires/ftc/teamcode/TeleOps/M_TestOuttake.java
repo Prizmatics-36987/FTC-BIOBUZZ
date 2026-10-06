@@ -2,18 +2,16 @@ package org.firstinspires.ftc.teamcode.TeleOps;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
-import org.firstinspires.ftc.teamcode.SubSystems.Intake;
+import org.firstinspires.ftc.teamcode.SubSystems.Outtake;
 
 @TeleOp(name="M_TestOuttake", group="Linear OpMode")
 public class M_TestOuttake extends OpMode {
-    Intake intake;
-
+    Outtake outtake;
     double power;
 
     @Override
     public void init() {
-        intake = new Intake();
+        outtake = new Outtake(hardwareMap);
 
         power = 0.5;
     }
@@ -21,12 +19,14 @@ public class M_TestOuttake extends OpMode {
     @Override
     public void loop() {
         power = Math.max(Math.min(power, 1), 0);
-        intake.setPower(power);
+        outtake.setPower(power);
 
-        if (gamepad1.a) {
+        if (gamepad1.aWasPressed()) {
             power += 0.25;
-        } else if (gamepad1.b) {
+        } else if (gamepad1.bWasPressed()) {
             power -= 0.25;
+        } else if (gamepad1.leftTriggerWasPressed()) {
+            outtake.reverseDirection();
         }
 
         telemetry.addData("power: ", power);

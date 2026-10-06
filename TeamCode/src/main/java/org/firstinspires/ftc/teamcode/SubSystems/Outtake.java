@@ -1,16 +1,16 @@
 package org.firstinspires.ftc.teamcode.SubSystems;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
-
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.seattlesolvers.solverslib.command.SubsystemBase;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class Outtake extends SubsystemBase {
-    public static DcMotor motor1, motor2;
+public class Outtake {
+    DcMotor motor1, motor2;
 
-    public Outtake() {
-        motor1 = hardwareMap.dcMotor.get("outtake1");
-        motor2 = hardwareMap.dcMotor.get("outtake2");
+    public Outtake(HardwareMap hw) {
+        motor1 = hw.dcMotor.get("outtake1");
+        motor2 = hw.dcMotor.get("outtake2");
+        motor1.setDirection(DcMotorSimple.Direction.REVERSE);
 
         motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
@@ -19,5 +19,10 @@ public class Outtake extends SubsystemBase {
     public void setPower(double power) {
         motor1.setPower(power);
         motor2.setPower(power);
+    }
+
+    public void reverseDirection() {
+        motor1.setDirection(motor1.getDirection().inverted());
+        motor2.setDirection(motor2.getDirection().inverted());
     }
 }

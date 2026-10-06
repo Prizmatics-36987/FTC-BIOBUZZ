@@ -15,7 +15,7 @@ public class ManualDrive extends SubsystemBase {
     private double movementMultiplier = 0.5;
     private final Gamepad gp1 = gamepad1;
 
-    Intake intake = new Intake();
+    Intake intake = new Intake(hardwareMap);
 
     public ManualDrive() {
         follower = Constants.createFollower(hardwareMap);
