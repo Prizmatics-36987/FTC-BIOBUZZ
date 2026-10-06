@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.TeleOps.Autonomous;
+package org.firstinspires.ftc.teamcode.OpMode.Autonomous;
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.BezierCurve;
