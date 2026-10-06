@@ -20,7 +20,6 @@ public class A_FullAuto extends OpMode {
     private State pathState;
     private Side shootSide;
 
-
     private final Pose startPose = new Pose(35, 12, Math.toRadians(90));
     private final Pose secPose = new Pose(58, 35, Math.toRadians(90));
     private final Pose thirdPose = new Pose(10, 50, Math.toRadians(180));
