@@ -8,6 +8,8 @@ import com.pedropathing.paths.PathChain;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
+import org.firstinspires.ftc.teamcode.SubSystems.Intake;
+import org.firstinspires.ftc.teamcode.SubSystems.Outtake;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 import java.util.concurrent.TimeUnit;
@@ -19,6 +21,9 @@ public class A_FullAuto extends OpMode {
 
     private State pathState;
     private Side shootSide;
+
+    private final Intake intake = new Intake();
+    private final Outtake outtake = new Outtake();
 
     private final Pose startPose = new Pose(35, 12, Math.toRadians(90));
     private final Pose secPose = new Pose(58, 35, Math.toRadians(90));
@@ -73,12 +78,13 @@ public class A_FullAuto extends OpMode {
                 pathState = State.SHOOT;
             case SHOOT:
                 if (!follower.isBusy()) {
-//                    outtake.shoot();
+                    outtake.setPower(1);
                     try {
                         TimeUnit.SECONDS.sleep(1);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
+                    outtake.setPower(0);
 
                     switch (shootSide) {
                         case LEFT:
@@ -90,12 +96,13 @@ public class A_FullAuto extends OpMode {
                 }
             case FLOWER:
                 if (!follower.isBusy()) {
-//                    intake.setPower(1)
+                    intake.setPower(1);
                     try {
                         TimeUnit.MILLISECONDS.sleep(500);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
+                    intake.setPower(0);
 
                     follower.followPath(toShoot);
 
