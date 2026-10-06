@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 @Autonomous(name="A_PPTest", group="Linear OpMode")
 public class A_PPTest extends OpMode {
-    public static Follower follower;
+    private static Follower follower;
 
     private PathChain path;
 
@@ -28,8 +28,6 @@ public class A_PPTest extends OpMode {
 
     @Override
     public void start() {
-        follower.setStartingPose(startPose);
-
         path = follower.pathBuilder()
                 .addPath(new BezierLine(startPose, topPose))
                 .setLinearHeadingInterpolation(startPose.getHeading(), topPose.getHeading())
