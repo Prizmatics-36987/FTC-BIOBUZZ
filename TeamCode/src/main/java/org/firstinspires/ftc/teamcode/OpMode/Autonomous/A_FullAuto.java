@@ -25,11 +25,11 @@ public class A_FullAuto extends OpMode {
     private final Intake intake = new Intake(hardwareMap);
     private final Outtake outtake = new Outtake(hardwareMap);
 
-    private final Pose startPose = new Pose(35, 12, Math.PI / 2);
-    private final Pose secPose = new Pose(58, 35, Math.PI / 2);
-    private final Pose thirdPose = new Pose(10, 50, Math.PI);
-    private final Pose forthPose = new Pose(58, 105, Math.PI * 1.5);
-    private final Pose forthPoseCtrl1 = new Pose(10, 110, 0);
+    private final Pose startPose = new Pose(35, 12, Math.toRadians(90));
+    private final Pose secPose = new Pose(58, 35, Math.toRadians(90));
+    private final Pose thirdPose = new Pose(10, 50, Math.toRadians(180));
+    private final Pose forthPose = new Pose(58, 105, Math.toRadians(270));
+    private final Pose forthPoseCtrl1 = new Pose(10, 110, Math.toRadians(0));
 
     @Override
     public void init() {
