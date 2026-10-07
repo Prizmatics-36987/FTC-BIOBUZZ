@@ -5,13 +5,13 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.SubSystems.ManualDrive;
 
-@TeleOp(name="Drive", group="Linear OpMode")
+@TeleOp(name="M_Drive", group="Linear OpMode")
 public class M_Drive extends OpMode {
     ManualDrive drive;
 
     @Override
     public void init() {
-        drive = new ManualDrive();
+        drive = new ManualDrive(hardwareMap);
     }
 
     @Override
