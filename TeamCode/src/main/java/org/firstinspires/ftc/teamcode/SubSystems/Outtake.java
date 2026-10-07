@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Outtake {
     DcMotor motor1, motor2;
 
-    public Outtake(HardwareMap hw) {
-        motor1 = hw.dcMotor.get("outtake1");
-        motor2 = hw.dcMotor.get("outtake2");
+    public Outtake(HardwareMap hardwareMap) {
+        motor1 = hardwareMap.dcMotor.get("outtake1");
+        motor2 = hardwareMap.dcMotor.get("outtake2");
         motor1.setDirection(DcMotorSimple.Direction.REVERSE);
 
         motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
