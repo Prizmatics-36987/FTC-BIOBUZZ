@@ -34,8 +34,6 @@ public class AprilTag extends SubsystemBase {
                 .setDrawCubeProjection(true)
                 .setOutputUnits(DistanceUnit.CM, AngleUnit.DEGREES)
                 .setTagLibrary(AprilTagGameDatabase.getBioBuzzTagLibrary())
-                //.setLensIntrinsics(578.272, 578.272, 402.145, 221.506)
-                // ... these parameters are fx, fy, cx, cy.
                 .build();
 
         VisionPortal.Builder builder = new VisionPortal.Builder();
