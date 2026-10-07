@@ -46,7 +46,11 @@ public class A_FullAuto extends OpMode {
     @Override
     public void loop() {
         follower.update();
-        autonomousPathUpdate();
+        try {
+            autonomousPathUpdate();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         telemetry.addData("Path State", pathState);
         telemetry.addData("Pose", follower.getPose());
         telemetry.update();
@@ -69,7 +73,7 @@ public class A_FullAuto extends OpMode {
                 .build();
     }
 
-    private void autonomousPathUpdate() {
+    private void autonomousPathUpdate() throws InterruptedException {
         switch (pathState) {
             case READY:
                 follower.followPath(toFirstShoot);
@@ -79,11 +83,7 @@ public class A_FullAuto extends OpMode {
             case SHOOT:
                 if (!follower.isBusy()) {
                     outtake.setPower(1);
-                    try {
-                        TimeUnit.SECONDS.sleep(1);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
+                    TimeUnit.SECONDS.sleep(1);
                     outtake.setPower(0);
 
                     switch (shootSide) {
