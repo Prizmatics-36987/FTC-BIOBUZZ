@@ -4,19 +4,19 @@ package org.firstinspires.ftc.teamcode.OpMode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.SubSystems.ManualDrive_NoPedro;
+import org.firstinspires.ftc.teamcode.SubSystems.DriveTrain_NoPedro;
 
 @TeleOp(name="M_Drive_NoPedro", group="Linear OpMode")
 public class M_Drive_NoPedro extends OpMode {
 
-    public ManualDrive_NoPedro manualDriveNoPedro;
+    public DriveTrain_NoPedro driveTrain;
 
     double power = 1;
 
     @Override
     public void init() {
 
-        manualDriveNoPedro = new ManualDrive_NoPedro(hardwareMap);
+        driveTrain = new DriveTrain_NoPedro(hardwareMap);
 
     }
 
@@ -25,23 +25,23 @@ public class M_Drive_NoPedro extends OpMode {
         telemetry.addData("power:", power);
 
         if (gamepad1.dpad_down) {
-            manualDriveNoPedro.go_backwards(power);
+            driveTrain.go_backwards(power);
         }
 
         if (gamepad1.dpad_up) {
-            manualDriveNoPedro.go_forwards(power);
+            driveTrain.go_forwards(power);
         }
 
         if (gamepad1.dpad_right) {
-            manualDriveNoPedro.go_right(power);
+            driveTrain.go_right(power);
         }
 
         if (gamepad1.dpad_left) {
-            manualDriveNoPedro.go_left(power);
+            driveTrain.go_left(power);
         }
 
         if (gamepad1.atRest()) {
-            manualDriveNoPedro.brake();
+            driveTrain.brake();
         }
 
         if (gamepad1.leftBumperWasPressed()) {

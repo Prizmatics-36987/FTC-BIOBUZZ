@@ -5,12 +5,12 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 
-public class ManualDrive_NoPedro extends SubsystemBase {
+public class DriveTrain_NoPedro extends SubsystemBase {
     private final double movementMultiplier = 0.5;
 
     private final DcMotor front_left, front_right, back_left, back_right;
 
-    public ManualDrive_NoPedro(HardwareMap hardwareMap) {
+    public DriveTrain_NoPedro(HardwareMap hardwareMap) {
         front_left = hardwareMap.dcMotor.get("front_left");
         front_right = hardwareMap.dcMotor.get("front_right");
         back_left = hardwareMap.dcMotor.get("back_left");
