@@ -1,27 +1,16 @@
 package org.firstinspires.ftc.teamcode.SubSystems;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
-
-import com.pedropathing.follower.Follower;
-import com.pedropathing.geometry.Pose;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 
-import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
-
 public class ManualDrive_NoPedro extends SubsystemBase {
     private final double movementMultiplier = 0.5;
-    private final HardwareMap hardwareMap;
 
     private final DcMotor front_left, front_right, back_left, back_right;
 
     public ManualDrive_NoPedro(HardwareMap hardwareMap) {
-        this.hardwareMap = hardwareMap;
-
         front_left = hardwareMap.dcMotor.get("front_left");
         front_right = hardwareMap.dcMotor.get("front_right");
         back_left = hardwareMap.dcMotor.get("back_left");
@@ -29,7 +18,6 @@ public class ManualDrive_NoPedro extends SubsystemBase {
 
         front_right.setDirection(DcMotorSimple.Direction.REVERSE);
         back_right.setDirection(DcMotorSimple.Direction.REVERSE);
-
     }
 
     public void go_forwards(double amount) {
