@@ -5,24 +5,24 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Outtake {
-    DcMotor motor1, motor2;
+    DcMotor outtake_left, outtake_right;
 
     public Outtake(HardwareMap hw) {
-        motor1 = hw.dcMotor.get("outtake1");
-        motor2 = hw.dcMotor.get("outtake2");
-        motor1.setDirection(DcMotorSimple.Direction.REVERSE);
+        outtake_left = hw.dcMotor.get("outtake_left");
+        outtake_right = hw.dcMotor.get("outtake_right");
+        outtake_right.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        outtake_left.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        outtake_right.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
     public void setPower(double power) {
-        motor1.setPower(power);
-        motor2.setPower(power);
+        outtake_left.setPower(power);
+        outtake_right.setPower(power);
     }
 
     public void reverseDirection() {
-        motor1.setDirection(motor1.getDirection().inverted());
-        motor2.setDirection(motor2.getDirection().inverted());
+        outtake_left.setDirection(outtake_right.getDirection().inverted());
+        outtake_right.setDirection(outtake_right.getDirection().inverted());
     }
 }
