@@ -10,7 +10,8 @@ public class Outtake {
     public Outtake(HardwareMap hardwareMap) {
         outtake_left = hardwareMap.dcMotor.get("outtake_left");
         outtake_right = hardwareMap.dcMotor.get("outtake_right");
-        outtake_right.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        setDirection(DcMotorSimple.Direction.FORWARD);
 
         outtake_left.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         outtake_right.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
@@ -21,8 +22,16 @@ public class Outtake {
         outtake_right.setPower(power);
     }
 
+    public void setDirection(DcMotorSimple.Direction direction) {
+        outtake_left.setDirection(direction);
+        outtake_right.setDirection(direction.inverted());
+    }
+
+    public DcMotorSimple.Direction getDirection() {
+        return outtake_left.getDirection();
+    }
+
     public void reverseDirection() {
-        outtake_left.setDirection(outtake_right.getDirection().inverted());
-        outtake_right.setDirection(outtake_right.getDirection().inverted());
+        setDirection(getDirection().inverted());
     }
 }

@@ -25,6 +25,7 @@ public class M_Controller_No_Pedro extends OpMode {
     public void loop() {
         telemetry.addData("drive train power: ", driveTrainPower);
         telemetry.addData("outtake power: ", outtakePower);
+        telemetry.addData("direction: ", outtake.getDirection());
 
         if (gamepad1.dpad_up) {
             driveTrain.go_forwards(driveTrainPower);
