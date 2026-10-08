@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Outtake {
     DcMotor outtake_left, outtake_right;
 
-    public Outtake(HardwareMap hw) {
-        outtake_left = hw.dcMotor.get("outtake_left");
-        outtake_right = hw.dcMotor.get("outtake_right");
+    public Outtake(HardwareMap hardwareMap) {
+        outtake_left = hardwareMap.dcMotor.get("outtake_left");
+        outtake_right = hardwareMap.dcMotor.get("outtake_right");
         outtake_right.setDirection(DcMotorSimple.Direction.REVERSE);
 
         outtake_left.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
