@@ -1,11 +1,8 @@
 package org.firstinspires.ftc.teamcode.SubSystems;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
-
-import android.annotation.SuppressLint;
 import android.util.Size;
 
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.seattlesolvers.solverslib.command.SubsystemBase;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -15,18 +12,20 @@ import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagGameDatabase;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
-import org.firstinspires.ftc.vision.apriltag.AprilTagSingleDetection;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AprilTag extends SubsystemBase {
     private final AprilTagProcessor aprilTag;
     private final VisionPortal visionPortal;
 
-    List<AprilTagDetection> currentDetections = new ArrayList<>();
+    public final double fx = 865.771;
+    public final double fy = 865.771;
+    public final double cx = 336.332;
+    public final double cy = 259.291;
 
-    public AprilTag() {
+    public AprilTag(HardwareMap hardwareMap) {
+
         aprilTag = new AprilTagProcessor.Builder()
                 .setDrawTagID(true)
                 .setDrawTagOutline(true)
@@ -34,6 +33,7 @@ public class AprilTag extends SubsystemBase {
                 .setDrawCubeProjection(true)
                 .setOutputUnits(DistanceUnit.CM, AngleUnit.DEGREES)
                 .setTagLibrary(AprilTagGameDatabase.getBioBuzzTagLibrary())
+                .setLensIntrinsics(fx, fy, cx, cy)
                 .build();
 
         VisionPortal.Builder builder = new VisionPortal.Builder();
@@ -45,43 +45,13 @@ public class AprilTag extends SubsystemBase {
         visionPortal.setProcessorEnabled(aprilTag, true);
     }
 
-    @SuppressLint("DefaultLocale")
-    public void displayDetectionTelemetry(AprilTagSingleDetection detectedID) {
-        if (detectedID == null) {return;}
-        if (detectedID.metadata != null) {
-            telemetry.addLine(String.format("\n==== (ID %d) %s", detectedID.id, detectedID.metadata.name));
-            telemetry.addLine(String.format("XYZ %6.1f %6.1f %6.1f  (cm)", detectedID.ftcPose.x, detectedID.ftcPose.y, detectedID.ftcPose.z));
-            telemetry.addLine(String.format("PRY %6.1f %6.1f %6.1f  (deg)", detectedID.ftcPose.pitch, detectedID.ftcPose.roll, detectedID.ftcPose.yaw));
-            telemetry.addLine(String.format("RBE %6.1f %6.1f %6.1f  (cm, deg, deg)", detectedID.ftcPose.range, detectedID.ftcPose.bearing, detectedID.ftcPose.elevation));
-        } else {
-            telemetry.addLine(String.format("\n==== (ID %d) Unknown", detectedID.id));
-            telemetry.addLine(String.format("Center %6.0f %6.0f   (pixels)", detectedID.center.x, detectedID.center.y));
-        }
-    }
-
-    public AprilTagDetection getByID(int ID) {
-        update();
-
-        for (AprilTagDetection det : currentDetections) {
-            if (det instanceof AprilTagSingleDetection) {
-                if (((AprilTagSingleDetection) det).id == ID) {
-                    return det;
-                } else {
-                    return null; // TODO: Add AprilTagClusterDetection logic
-                }
-            }
-        }
-
-        return null;
+    public ArrayList<AprilTagDetection> getALlDetections() {
+        return aprilTag.getDetections();
     }
 
     public void stop() {
         if (visionPortal != null) {
             visionPortal.close();
         }
-    }
-
-    private void update() {
-        currentDetections = aprilTag.getDetections();
     }
 }

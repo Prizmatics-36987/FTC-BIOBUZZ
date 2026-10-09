@@ -1,33 +1,42 @@
 package org.firstinspires.ftc.teamcode.OpMode.TeleOp;
 
-import android.annotation.SuppressLint;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.SubSystems.AprilTag;
+import org.firstinspires.ftc.vision.apriltag.AprilTagClusterDetection;
+import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagSingleDetection;
+
+import java.util.ArrayList;
 
 @TeleOp(name="M_AprilTagTest", group="Linear OpMode")
 public class M_AprilTagTest extends OpMode {
-    private final Gamepad gp1 = gamepad1;
-
-    AprilTag april;
+    AprilTag aprilTag;
 
     @Override
     public void init() {
-        april = new AprilTag();
+        aprilTag = new AprilTag(hardwareMap);
     }
 
-    @SuppressLint("DefaultLocale")
     @Override
     public void loop() {
-        telemetry.update();
-
-        if (gp1.bWasPressed()) {
-            AprilTagSingleDetection id20 = (AprilTagSingleDetection) april.getByID(20);
-            april.displayDetectionTelemetry(id20);
+        ArrayList<AprilTagDetection> detections = aprilTag.getALlDetections();
+        if (detections.isEmpty()) {
+            telemetry.addLine("No AprilTags!");
         }
+
+        for (AprilTagDetection detection : detections) {
+            if (detection instanceof AprilTagSingleDetection) {
+                telemetry.addData("Single tag detected, id: ", ((AprilTagSingleDetection) detection).id);
+            }
+
+            if (detection instanceof AprilTagClusterDetection) {
+                telemetry.addData("Tag cluster, name: ", ((AprilTagClusterDetection) detection).metadata.name);
+            }
+        }
+
+        telemetry.update();
     }
 }
