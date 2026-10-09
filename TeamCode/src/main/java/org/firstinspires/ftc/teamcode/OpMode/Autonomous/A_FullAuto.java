@@ -8,8 +8,8 @@ import com.pedropathing.paths.PathChain;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.teamcode.SubSystems.Intake;
-import org.firstinspires.ftc.teamcode.SubSystems.Outtake;
+import org.firstinspires.ftc.teamcode.SubSystems.Sub_Intake;
+import org.firstinspires.ftc.teamcode.SubSystems.Sub_Outtake;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 import java.util.concurrent.TimeUnit;
@@ -22,8 +22,8 @@ public class A_FullAuto extends OpMode {
     private State pathState;
     private Side shootSide;
 
-    private final Intake intake = new Intake(hardwareMap);
-    private final Outtake outtake = new Outtake(hardwareMap);
+    private final Sub_Intake intake = new Sub_Intake(hardwareMap);
+    private final Sub_Outtake outtake = new Sub_Outtake(hardwareMap);
 
     private final Pose startPose = new Pose(35, 12, Math.toRadians(90));
     private final Pose secPose = new Pose(58, 35, Math.toRadians(90));

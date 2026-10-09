@@ -2,16 +2,16 @@ package org.firstinspires.ftc.teamcode.OpMode.TeleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import org.firstinspires.ftc.teamcode.SubSystems.Outtake;
+import org.firstinspires.ftc.teamcode.SubSystems.Sub_Outtake;
 
 @TeleOp(name="M_TestOuttake", group="Linear OpMode")
 public class M_TestOuttake extends OpMode {
-    Outtake outtake;
+    Sub_Outtake outtake;
     double power;
 
     @Override
     public void init() {
-        outtake = new Outtake(hardwareMap);
+        outtake = new Sub_Outtake(hardwareMap);
 
         power = 0.5;
     }

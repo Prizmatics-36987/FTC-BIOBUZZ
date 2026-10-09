@@ -3,13 +3,13 @@ package org.firstinspires.ftc.teamcode.OpMode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.SubSystems.DriveTrain_NoPedro;
-import org.firstinspires.ftc.teamcode.SubSystems.Outtake;
+import org.firstinspires.ftc.teamcode.SubSystems.Sub_DriveTrain_NoPedro;
+import org.firstinspires.ftc.teamcode.SubSystems.Sub_Outtake;
 
-@TeleOp(name = "M_Controller_No_Pedro", group = "Linear OpMode")
-public class M_Controller_No_Pedro extends OpMode {
-    DriveTrain_NoPedro driveTrain;
-    Outtake outtake;
+@TeleOp(name = "M_Controller", group = "Linear OpMode")
+public class M_Controller extends OpMode {
+    Sub_DriveTrain_NoPedro driveTrain;
+    Sub_Outtake outtake;
 
     double driveTrainPower = 1;
     double outtakePower = 0.5;
@@ -17,8 +17,8 @@ public class M_Controller_No_Pedro extends OpMode {
 
     @Override
     public void init() {
-        driveTrain = new DriveTrain_NoPedro(hardwareMap);
-        outtake = new Outtake(hardwareMap);
+        driveTrain = new Sub_DriveTrain_NoPedro(hardwareMap);
+        outtake = new Sub_Outtake(hardwareMap);
     }
 
     @Override

@@ -7,8 +7,8 @@ import com.pedropathing.paths.PathChain;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.teamcode.SubSystems.Intake;
-import org.firstinspires.ftc.teamcode.SubSystems.Outtake;
+import org.firstinspires.ftc.teamcode.SubSystems.Sub_Intake;
+import org.firstinspires.ftc.teamcode.SubSystems.Sub_Outtake;
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 
 @Autonomous(name="A_Triangle", group="Linear OpMode")
@@ -20,8 +20,8 @@ public class A_Triangle extends OpMode {
     private final Pose topPose = new Pose(40, 40, Math.toRadians(180));
     private final Pose downPose = new Pose(40, 10, Math.toRadians(0));
 
-    Intake intake = new Intake(hardwareMap);
-    Outtake outtake = new Outtake(hardwareMap);
+    Sub_Intake intake = new Sub_Intake(hardwareMap);
+    Sub_Outtake outtake = new Sub_Outtake(hardwareMap);
 
     @Override
     public void init() {

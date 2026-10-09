@@ -15,7 +15,7 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 
 import java.util.ArrayList;
 
-public class AprilTag extends SubsystemBase {
+public class Sub_AprilTag extends SubsystemBase {
     private final AprilTagProcessor aprilTag;
     private final VisionPortal visionPortal;
 
@@ -24,7 +24,7 @@ public class AprilTag extends SubsystemBase {
     public final double cx = 336.332;
     public final double cy = 259.291;
 
-    public AprilTag(HardwareMap hardwareMap) {
+    public Sub_AprilTag(HardwareMap hardwareMap) {
 
         aprilTag = new AprilTagProcessor.Builder()
                 .setDrawTagID(true)

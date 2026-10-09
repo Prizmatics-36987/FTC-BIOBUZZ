@@ -4,19 +4,19 @@ package org.firstinspires.ftc.teamcode.OpMode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.SubSystems.DriveTrain_NoPedro;
+import org.firstinspires.ftc.teamcode.SubSystems.Sub_DriveTrain_NoPedro;
 
 @TeleOp(name="M_Drive_NoPedro", group="Linear OpMode")
 public class M_Drive_NoPedro extends OpMode {
 
-    public DriveTrain_NoPedro driveTrain;
+    public Sub_DriveTrain_NoPedro driveTrain;
 
     double power = 1;
 
     @Override
     public void init() {
 
-        driveTrain = new DriveTrain_NoPedro(hardwareMap);
+        driveTrain = new Sub_DriveTrain_NoPedro(hardwareMap);
 
     }
 
