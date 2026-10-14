@@ -38,6 +38,7 @@ public class Constants {
         c.globalDistanceUnit.set(DistanceUnit.INCH);
         c.offsetUnits.set(DistanceUnit.INCH);
     });
+
     public static ForesightConfig foresightConfig = new ForesightConfig(
             c -> {
                 Controller primaryTranslationalForward = Controller.proportional(0.15654232258482914);
@@ -65,7 +66,6 @@ public class Constants {
     );
 
     public static Follower create(HardwareMap h) {
-        // return new Follower(Drivetrain, Localizer, Foresight);
         return new Follower(
                 new PinpointLocalizer(h, localizerConfig),
                 new Mecanum(h, drivetrainConfig),
