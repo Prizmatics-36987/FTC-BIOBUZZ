@@ -6,14 +6,12 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.SubSystems.Sub_DriveTrain_NoPedro;
 import org.firstinspires.ftc.teamcode.SubSystems.Sub_Outtake;
 
-@TeleOp(name = "M_Controller", group = "Linear OpMode")
+@TeleOp(name = "M_Controller_Joystick", group = "Linear OpMode")
 public class M_Controller extends OpMode {
     Sub_DriveTrain_NoPedro driveTrain;
     Sub_Outtake outtake;
 
     double driveTrainPower = 1;
-    double outtakePower = 0.5;
-
 
     @Override
     public void init() {
@@ -24,8 +22,8 @@ public class M_Controller extends OpMode {
     @Override
     public void loop() {
         telemetry.addData("drive train power: ", driveTrainPower);
-        telemetry.addData("outtake power: ", outtakePower);
-        telemetry.addData("direction: ", outtake.getDirection());
+        telemetry.addData("outtake direction: ", outtake.getDirection());
+        telemetry.addData("aiming servo position: ", outtake.getAimingServoPosition());
 
         if (gamepad1.dpad_up) {
             driveTrain.go_forwards(driveTrainPower);
@@ -55,19 +53,13 @@ public class M_Controller extends OpMode {
             driveTrainPower += 0.25;
         }
 
-        if (gamepad1.leftTriggerWasPressed() && outtakePower > 0) {
-            outtakePower -= 0.25;
-        }
-
-        if (gamepad1.rightTriggerWasPressed() && outtakePower < 1) {
-            outtakePower += 0.25;
-        }
-
-        if (gamepad1.triangleWasPressed()) {
+        if (gamepad1.circleWasPressed()) {
             outtake.reverseDirection();
         }
 
-        outtake.setPower(outtakePower);
+        outtake.setAimingServoPosition(gamepad1.left_stick_y);
+        outtake.setPower(gamepad1.right_stick_y);
+
         telemetry.update();
     }
 }

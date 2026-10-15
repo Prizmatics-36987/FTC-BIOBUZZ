@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.SubSystems;
 import android.util.Size;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.seattlesolvers.solverslib.command.SubsystemBase;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -15,7 +14,7 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 
 import java.util.ArrayList;
 
-public class Sub_AprilTag extends SubsystemBase {
+public class Sub_AprilTag {
     private final AprilTagProcessor aprilTag;
     private final VisionPortal visionPortal;
 

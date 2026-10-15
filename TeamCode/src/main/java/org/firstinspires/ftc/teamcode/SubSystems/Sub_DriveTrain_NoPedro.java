@@ -3,9 +3,8 @@ package org.firstinspires.ftc.teamcode.SubSystems;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.seattlesolvers.solverslib.command.SubsystemBase;
 
-public class Sub_DriveTrain_NoPedro extends SubsystemBase {
+public class Sub_DriveTrain_NoPedro {
     private final double movementMultiplier = 0.5;
 
     private final DcMotor front_left, front_right, back_left, back_right;

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.OpMode.Autonomous;
+package org.firstinspires.ftc.teamcode.OpMode.TeleOp;
 
 import com.pedropathing.api.Paths;
 import com.pedropathing.drivetrain.DrivePowers;
