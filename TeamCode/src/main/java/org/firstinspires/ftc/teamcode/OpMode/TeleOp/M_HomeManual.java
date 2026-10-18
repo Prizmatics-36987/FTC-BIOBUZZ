@@ -24,60 +24,57 @@ public class M_HomeManual extends OpMode {
 
     @Override
     public void loop() {
-        if (!follower.isBusy()) {
-            DrivePowers drivePowers = getDrivePowers();
-            follower.manual(drivePowers);
-
-            if (gamepad1.touchpadWasPressed()) {
-                manualControl = false;
-
-                Pose followerPose = follower.pose();
-                Path path = Paths.line(followerPose, Pose.zero()).linear(followerPose, Pose.zero());
-                follower.follow(path);
-            }
-        }
-
-        else {
+        if (follower.isBusy()) {
             manualControl = true;
+            follower.update();
+            return;
         }
 
+        DrivePowers drivePowers = getDrivePowers();
+        follower.manual(drivePowers);
 
+        if (gamepad1.touchpadWasPressed()) {
+            manualControl = false;
+
+            Pose followerPose = follower.pose();
+            Path path = Paths.line(followerPose, Pose.zero()).linear(followerPose, Pose.zero());
+            follower.follow(path);
+        }
 
         follower.update();
     }
 
 
     private DrivePowers getDrivePowers() {
-            if (!manualControl) {
-                return DrivePowers.zero();
-            }
-
-            float forward = -gamepad1.left_stick_y;
-            float strafe = -gamepad1.left_stick_x;
-            float turn = -gamepad1.right_stick_x;
-
-            if (gamepad1.xWasPressed()) {
-                follower.setPose(Pose.zero());
-            }
-
-            DrivePowers drivePowers;
-
-            if (gamepad1.right_trigger == 0) {
-                drivePowers = ManualDrive.fieldCentric(
-                        forward,
-                        strafe,
-                        turn,
-                        follower.pose().heading()
-                );
-            }
-
-            else {
-                drivePowers = new DrivePowers(
-                        forward,
-                        strafe,
-                        turn
-                );
-            }
-            return drivePowers;
+        if (!manualControl) {
+            return DrivePowers.zero();
         }
+
+        float forward = -gamepad1.left_stick_y;
+        float strafe = -gamepad1.left_stick_x;
+        float turn = -gamepad1.right_stick_x;
+
+        if (gamepad1.xWasPressed()) {
+            follower.setPose(Pose.zero());
+        }
+
+        DrivePowers drivePowers;
+
+        if (gamepad1.right_trigger == 0) {
+            drivePowers = ManualDrive.fieldCentric(
+                    forward,
+                    strafe,
+                    turn,
+                    follower.pose().heading()
+            );
+        } else {
+            drivePowers = new DrivePowers(
+                    forward,
+                    strafe,
+                    turn
+            );
+        }
+
+        return drivePowers;
+    }
 }
