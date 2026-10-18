@@ -19,8 +19,8 @@ public class A_ParentsDay extends OpMode {
     private final Pose start = poseFactory.of(130, 10, 90);
     private final Pose point1 = poseFactory.of(130, 60, 90);
     private final Pose point2 = poseFactory.of(60, 60, 180);
-    private final Pose point3 = poseFactory.of(60, 105, 0);
-    private final Pose point4 = poseFactory.of(105, 105, 0);
+    private final Pose point3 = poseFactory.of(60, 106, 0);
+    private final Pose point4 = poseFactory.of(105, 106, 0);
     private final Pose point5 = poseFactory.of(105, 120, 90);
 
     public final Path paths = Paths.path(
