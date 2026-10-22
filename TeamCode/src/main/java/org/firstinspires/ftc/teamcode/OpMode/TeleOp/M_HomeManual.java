@@ -14,7 +14,6 @@ import org.firstinspires.ftc.teamcode.pedro.Constants;
 @TeleOp(name="M_HomeManual", group="Linear OpMode")
 public class M_HomeManual extends OpMode {
     private Follower follower;
-    private boolean manualControl;
 
     @Override
     public void init() {
@@ -24,21 +23,15 @@ public class M_HomeManual extends OpMode {
 
     @Override
     public void loop() {
-        if (follower.isBusy()) {
-            manualControl = true;
-            follower.update();
-            return;
-        }
+        if (!follower.isBusy()) {
+            DrivePowers drivePowers = getDrivePowers();
+            follower.manual(drivePowers);
 
-        DrivePowers drivePowers = getDrivePowers();
-        follower.manual(drivePowers);
-
-        if (gamepad1.touchpadWasPressed()) {
-            manualControl = false;
-
-            Pose followerPose = follower.pose();
-            Path path = Paths.line(followerPose, Pose.zero()).linear(followerPose, Pose.zero());
-            follower.follow(path);
+            if (gamepad1.touchpadWasPressed()) {
+                Pose followerPose = follower.pose();
+                Path path = Paths.line(followerPose, Pose.zero()).linear(followerPose, Pose.zero());
+                follower.follow(path);
+            }
         }
 
         follower.update();
@@ -46,9 +39,6 @@ public class M_HomeManual extends OpMode {
 
 
     private DrivePowers getDrivePowers() {
-        if (!manualControl) {
-            return DrivePowers.zero();
-        }
 
         float forward = -gamepad1.left_stick_y;
         float strafe = -gamepad1.left_stick_x;
