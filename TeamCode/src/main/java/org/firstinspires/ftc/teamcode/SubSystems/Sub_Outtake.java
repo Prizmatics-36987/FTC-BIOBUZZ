@@ -7,32 +7,32 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Sub_Outtake {
     Servo aimingServo;
-    DcMotor outtakeLeft, outtakeRight;
+    DcMotor motorLeft, motorRight;
 
     public Sub_Outtake(HardwareMap hardwareMap) {
         aimingServo = hardwareMap.servo.get("aiming_servo");
 
-        outtakeLeft = hardwareMap.dcMotor.get("outtake_left");
-        outtakeRight = hardwareMap.dcMotor.get("outtake_right");
+        motorLeft = hardwareMap.dcMotor.get("outtake_left");
+        motorRight = hardwareMap.dcMotor.get("outtake_right");
 
         setDirection(DcMotorSimple.Direction.FORWARD);
 
-        outtakeLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        outtakeRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        motorLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        motorRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
     public void setPower(double power) {
-        outtakeLeft.setPower(power);
-        outtakeRight.setPower(power);
+        motorLeft.setPower(power);
+        motorRight.setPower(power);
     }
 
     public void setDirection(DcMotorSimple.Direction direction) {
-        outtakeLeft.setDirection(direction);
-        outtakeRight.setDirection(direction.inverted());
+        motorLeft.setDirection(direction);
+        motorRight.setDirection(direction.inverted());
     }
 
     public DcMotorSimple.Direction getDirection() {
-        return outtakeLeft.getDirection();
+        return motorLeft.getDirection();
     }
 
     public void reverseDirection() {
