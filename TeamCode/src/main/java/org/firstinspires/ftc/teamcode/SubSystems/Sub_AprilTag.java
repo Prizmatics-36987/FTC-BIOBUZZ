@@ -24,7 +24,6 @@ public class Sub_AprilTag {
     public final double cy = 259.291;
 
     public Sub_AprilTag(HardwareMap hardwareMap) {
-
         aprilTag = new AprilTagProcessor.Builder()
                 .setDrawTagID(true)
                 .setDrawTagOutline(true)
