@@ -15,9 +15,7 @@ public class M_Drive_NoPedro extends OpMode {
 
     @Override
     public void init() {
-
         driveTrain = new Sub_DriveTrain_NoPedro(hardwareMap);
-
     }
 
     @Override
