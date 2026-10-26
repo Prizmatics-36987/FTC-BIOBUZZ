@@ -23,7 +23,7 @@ public class A_ParentsDay extends OpMode {
     private final Pose point4 = poseFactory.of(105, 106, 0);
     private final Pose point5 = poseFactory.of(105, 120, 90);
 
-    public final Path paths = Paths.path(
+    private final Path paths = Paths.path(
             Paths.line(start, point1).linear(start, point1),
             Paths.line(point1, point2).linear(point1, point2),
             Paths.line(point2, point3).linear(point2, point3),
