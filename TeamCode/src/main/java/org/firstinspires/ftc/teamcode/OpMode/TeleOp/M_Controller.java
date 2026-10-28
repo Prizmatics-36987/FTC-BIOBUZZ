@@ -5,14 +5,28 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.SubSystems.Sub_DriveTrain;
+import org.firstinspires.ftc.teamcode.SubSystems.Sub_Intake;
+import org.firstinspires.ftc.teamcode.SubSystems.Sub_Outtake;
 
 @TeleOp(name="M_Controller", group="Linear OpMode")
 public class M_Controller extends OpMode {
     Follower follower;
 
+    Sub_Intake intake;
+    Sub_Outtake outtake;
+
+    boolean intake_active = false;
+    boolean outtake_active = false;
+
+    double INTAKE_POWER = 0.5;
+    double OUTTAKE_POWER = 0.5;
+
     @Override
     public void init() {
         follower = Sub_DriveTrain.getFollower();
+
+        intake = new Sub_Intake(hardwareMap);
+        outtake = new Sub_Outtake(hardwareMap);
     }
 
     @Override
@@ -21,6 +35,26 @@ public class M_Controller extends OpMode {
 
         if (gamepad1.touchpadWasPressed()) {
             Sub_DriveTrain.goHome(follower);
+        }
+
+        if (gamepad1.aWasPressed()) {
+            intake_active = !intake_active;
+        }
+
+        if (gamepad1.bWasPressed()) {
+            outtake_active = !outtake_active;
+        }
+
+        if (intake_active) {
+            intake.setPower(INTAKE_POWER);
+        } else {
+            intake.setPower(0);
+        }
+        
+        if (outtake_active) {
+            outtake.setPower(OUTTAKE_POWER);
+        } else {
+            intake.setPower(0);
         }
     }
 }
