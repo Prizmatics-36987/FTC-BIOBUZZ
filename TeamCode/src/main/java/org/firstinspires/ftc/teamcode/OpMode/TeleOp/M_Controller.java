@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.SubSystems.Sub_DriveTrain;
 
-@TeleOp(name="M_HomeManual", group="Linear OpMode")
+@TeleOp(name="M_Controller", group="Linear OpMode")
 public class M_Controller extends OpMode {
     Follower follower;
 
