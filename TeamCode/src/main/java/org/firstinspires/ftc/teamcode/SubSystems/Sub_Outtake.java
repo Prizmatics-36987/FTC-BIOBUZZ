@@ -10,7 +10,7 @@ public class Sub_Outtake {
     DcMotor motorLeft, motorRight;
 
     public Sub_Outtake(HardwareMap hardwareMap) {
-        aimingServo = hardwareMap.servo.get("aiming_servo");
+//        aimingServo = hardwareMap.servo.get("aiming_servo");
 
         motorLeft = hardwareMap.dcMotor.get("outtake_left");
         motorRight = hardwareMap.dcMotor.get("outtake_right");
@@ -39,11 +39,11 @@ public class Sub_Outtake {
         setDirection(getDirection().inverted());
     }
 
-    public void setAimingServoPosition(double position) {
-        aimingServo.setPosition(position);
-    }
-
-    public double getAimingServoPosition() {
-        return aimingServo.getPosition();
-    }
+//    public void setAimingServoPosition(double position) {
+//        aimingServo.setPosition(position);
+//    }
+//
+//    public double getAimingServoPosition() {
+//        return aimingServo.getPosition();
+//    }
 }

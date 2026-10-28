@@ -44,9 +44,10 @@ public class M_TestOuttake extends OpMode {
         angle = Math.max(Math.min(angle, Servo.MAX_POSITION), Servo.MIN_POSITION);
 
         outtake.setPower(power);
-        outtake.setAimingServoPosition(angle);
+//        outtake.setAimingServoPosition(angle);
 
         telemetry.addData("power: ", power);
+//        telemetry.addData("servo angle: ", angle);
         telemetry.update();
     }
 }
