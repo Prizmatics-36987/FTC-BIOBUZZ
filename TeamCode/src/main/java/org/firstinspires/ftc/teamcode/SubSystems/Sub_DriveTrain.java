@@ -12,30 +12,27 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 public class Sub_DriveTrain {
-    private static Gamepad gamepad1;
-    private static HardwareMap hardwareMap;
+    private final Follower follower;
+
+    private final Gamepad gamepad1;
 
     public Sub_DriveTrain(HardwareMap hardwareMap, Gamepad gamepad1) {
-        Sub_DriveTrain.hardwareMap = hardwareMap;
-        Sub_DriveTrain.gamepad1 = gamepad1;
-    }
+        this.gamepad1 = gamepad1;
 
-    public static Follower getFollower() {
-        Follower follower = Constants.create(hardwareMap);
+        follower = Constants.create(hardwareMap);
         follower.setPose(Pose.zero());
-
-        return follower;
     }
 
-    public static void drive(Follower follower) {
+    public void drive() {
         if (!follower.isBusy()) {
-            DrivePowers drivePowers = getDrivePowers(follower);
+            DrivePowers drivePowers = getDrivePowers();
             follower.manual(drivePowers);
-            follower.update();
         }
+
+        follower.update();
     }
 
-    private static DrivePowers getDrivePowers(Follower follower) {
+    private DrivePowers getDrivePowers() {
         float forward = -gamepad1.left_stick_y;
         float strafe = -gamepad1.left_stick_x;
         float turn = -gamepad1.right_stick_x;
@@ -64,7 +61,7 @@ public class Sub_DriveTrain {
         return drivePowers;
     }
 
-    public static void goHome(Follower follower) {
+    public void goHome() {
         Pose followerPose = follower.pose();
         Path path = Paths.line(followerPose, Pose.zero()).linear(followerPose, Pose.zero());
         follower.follow(path);

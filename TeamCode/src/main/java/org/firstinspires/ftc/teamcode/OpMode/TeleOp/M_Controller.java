@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.OpMode.TeleOp;
 
-import com.pedropathing.follower.Follower;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -10,8 +9,7 @@ import org.firstinspires.ftc.teamcode.SubSystems.Sub_Outtake;
 
 @TeleOp(name="M_Controller", group="Linear OpMode")
 public class M_Controller extends OpMode {
-    Follower follower;
-
+    Sub_DriveTrain driveTrain;
     Sub_Intake intake;
     Sub_Outtake outtake;
 
@@ -23,18 +21,17 @@ public class M_Controller extends OpMode {
 
     @Override
     public void init() {
-        follower = Sub_DriveTrain.getFollower();
-
+        driveTrain = new Sub_DriveTrain(hardwareMap, gamepad1);
         intake = new Sub_Intake(hardwareMap);
         outtake = new Sub_Outtake(hardwareMap);
     }
 
     @Override
     public void loop() {
-        Sub_DriveTrain.drive(follower);
+        driveTrain.drive();
 
         if (gamepad1.touchpadWasPressed()) {
-            Sub_DriveTrain.goHome(follower);
+            driveTrain.goHome();
         }
 
         if (gamepad1.aWasPressed()) {

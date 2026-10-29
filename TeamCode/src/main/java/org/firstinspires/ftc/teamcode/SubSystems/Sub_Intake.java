@@ -9,7 +9,7 @@ public class Sub_Intake {
 
     public Sub_Intake(HardwareMap hw) {
         motor = hw.dcMotor.get("intake");
-        motor.setDirection(DcMotorSimple.Direction.FORWARD);
+        motor.setDirection(DcMotorSimple.Direction.REVERSE);
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
