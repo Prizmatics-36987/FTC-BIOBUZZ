@@ -12,18 +12,18 @@ import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 @Autonomous(name="A_ParentsDay", group="Linear OpMode")
 public class A_ParentsDay extends OpMode {
-    private Follower follower;
+    Follower follower;
 
-    private final PoseFactory poseFactory = PoseFactory.degrees();
+    final PoseFactory poseFactory = PoseFactory.degrees();
 
-    private final Pose start = poseFactory.of(130, 10, 90);
-    private final Pose point1 = poseFactory.of(130, 60, 90);
-    private final Pose point2 = poseFactory.of(60, 60, 180);
-    private final Pose point3 = poseFactory.of(60, 106, 0);
-    private final Pose point4 = poseFactory.of(105, 106, 0);
-    private final Pose point5 = poseFactory.of(105, 120, 90);
+    final Pose start = poseFactory.of(130, 10, 90);
+    final Pose point1 = poseFactory.of(130, 60, 90);
+    final Pose point2 = poseFactory.of(60, 60, 180);
+    final Pose point3 = poseFactory.of(60, 106, 0);
+    final Pose point4 = poseFactory.of(105, 106, 0);
+    final Pose point5 = poseFactory.of(105, 120, 90);
 
-    private final Path paths = Paths.path(
+    final Path paths = Paths.path(
             Paths.line(start, point1).linear(start, point1),
             Paths.line(point1, point2).linear(point1, point2),
             Paths.line(point2, point3).linear(point2, point3),

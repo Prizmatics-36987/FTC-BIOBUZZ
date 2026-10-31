@@ -12,9 +12,9 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 public class Sub_DriveTrain {
-    private final Follower follower;
+    final Follower follower;
 
-    private final Gamepad gamepad1;
+    final Gamepad gamepad1;
 
     public Sub_DriveTrain(HardwareMap hardwareMap, Gamepad gamepad1) {
         this.gamepad1 = gamepad1;
