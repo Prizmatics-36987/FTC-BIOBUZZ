@@ -42,12 +42,16 @@ public class M_Controller extends OpMode {
             outtake_active = !outtake_active;
         }
 
+        setSubsystemPowers(intake_active, outtake_active);
+    }
+
+    private void setSubsystemPowers(boolean intake_active, boolean outtake_active) {
         if (intake_active) {
             intake.setPower(INTAKE_POWER);
         } else {
             intake.setPower(0);
         }
-        
+
         if (outtake_active) {
             outtake.setPower(OUTTAKE_POWER);
         } else {
