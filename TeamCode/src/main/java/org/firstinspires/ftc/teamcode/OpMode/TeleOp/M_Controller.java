@@ -31,7 +31,7 @@ public class M_Controller extends OpMode {
         driveTrain.drive();
 
         if (gamepad1.touchpadWasPressed()) {
-            driveTrain.goHome();
+            driveTrain.snippetGoHome();
         }
 
         if (gamepad1.aWasPressed()) {

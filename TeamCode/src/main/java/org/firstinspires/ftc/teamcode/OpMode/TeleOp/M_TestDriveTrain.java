@@ -19,7 +19,7 @@ public class M_TestDriveTrain extends OpMode {
         driveTrain.drive();
 
         if (gamepad1.touchpadWasPressed()) {
-            driveTrain.goHome();
+            driveTrain.snippetGoHome();
         }
     }
 }

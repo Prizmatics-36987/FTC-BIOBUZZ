@@ -61,9 +61,9 @@ public class Sub_DriveTrain {
         return drivePowers;
     }
 
-    public void goHome() {
-        Pose followerPose = follower.pose();
-        Path path = Paths.line(followerPose, Pose.zero()).linear(followerPose, Pose.zero());
-        follower.follow(path);
+    public void snippetGoHome() {
+        Pose currentPose = follower.pose();
+        Path toHome = Paths.line(currentPose, Pose.zero()).linear(currentPose, Pose.zero());
+        follower.follow(toHome);
     }
 }
