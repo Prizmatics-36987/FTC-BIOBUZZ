@@ -1,21 +1,14 @@
-
-package org.firstinspires.ftc.teamcode.OpMode.Auto;
+package org.firstinspires.ftc.teamcode.SubSystems;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Size;
 
-import com.pedropathing.drivetrain.DrivePowers;
-import com.pedropathing.follower.Follower;
-import com.pedropathing.follower.ManualDrive;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.internal.camera.calibration.CameraCalibration;
-import org.firstinspires.ftc.teamcode.SubSystems.Sub_Intake;
-import org.firstinspires.ftc.teamcode.pedro.Constants;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.VisionProcessor;
 import org.opencv.core.Core;
@@ -29,62 +22,8 @@ import org.opencv.imgproc.Imgproc;
 import java.util.ArrayList;
 import java.util.List;
 
-@Autonomous(name = "A_balolo", group = "Linear OpMode")
-public class A_balolo extends OpMode {
-    private Follower follower;
-    private VisionPortal visionPortal;
-    private RedProcessor pipe;
-
-    private Sub_Intake intake1;
-
-    @Override
-    public void init() {
-        follower = Constants.create(hardwareMap);
-        pipe = new RedProcessor();
-        intake1 = new Sub_Intake(hardwareMap);
-
-
-        visionPortal = new VisionPortal.Builder()
-                .setCamera(hardwareMap.get(WebcamName.class, "Webcam 1"))
-                .setCameraResolution(new Size(640, 480))
-                .addProcessor(pipe)
-                .build();
-    }
-
-    @Override
-    public void loop() {
-        Point target = pipe.getLargestCenter();
-
-        if (target != null) {
-            telemetry.addData("Red object X", target.x);
-            telemetry.addData("Red object Y", target.y);
-            telemetry.addData("Horizontal error", target.x - 320.0);
-            double Tspeed = ((target.x -320.0) / 320) * 0.75;
-            double speed = ((target.y - 480) / 240) * 0.75;
-            intake1.setPower(1.0);
-            
-            follower.manual(0.5, 0, -Tspeed);
-        } else {
-            telemetry.addLine("No red object detected");
-            follower.stop();
-        }
-
-        follower.update();
-        telemetry.update();
-    }
-
-    @Override
-    public void stop() {
-        if (visionPortal != null) {
-            visionPortal.close();
-        }
-    }
-}
-
-class RedProcessor implements VisionProcessor {
+public class Sub_Vision implements VisionProcessor {
     private final Mat hsv = new Mat();
-    private final Mat redLow = new Mat();
-    private final Mat redHigh = new Mat();
     private final Mat mask = new Mat();
     private final Mat hierarchy = new Mat();
     private final Mat kernel = Imgproc.getStructuringElement(
@@ -100,7 +39,7 @@ class RedProcessor implements VisionProcessor {
     private final Paint boxPaint = new Paint();
     private final Paint textPaint = new Paint();
 
-    RedProcessor() {
+    public Sub_Vision() {
         boxPaint.setColor(Color.MAGENTA);
         boxPaint.setStyle(Paint.Style.STROKE);
         boxPaint.setStrokeWidth(3);
@@ -110,8 +49,7 @@ class RedProcessor implements VisionProcessor {
     }
 
     @Override
-    public void init(int width, int height, CameraCalibration calibration) {
-    }
+    public void init(int width, int height, CameraCalibration calibration) {}
 
     @Override
     public Object processFrame(Mat frame, long captureTimeNanos) {
@@ -196,8 +134,16 @@ class RedProcessor implements VisionProcessor {
         }
     }
 
-    Point getLargestCenter() {
+    public Point getLargestCenter() {
         Point center = largestCenter;
         return center == null ? null : new Point(center.x, center.y);
+    }
+
+    public VisionPortal getVisionPortal(HardwareMap hardwareMap) {
+        return new VisionPortal.Builder()
+                .setCamera(hardwareMap.get(WebcamName.class, "Webcam 1"))
+                .setCameraResolution(new Size(640, 480))
+                .addProcessor(this)
+                .build();
     }
 }
