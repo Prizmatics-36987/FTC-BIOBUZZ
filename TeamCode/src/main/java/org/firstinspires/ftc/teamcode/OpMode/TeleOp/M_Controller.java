@@ -3,63 +3,59 @@ package org.firstinspires.ftc.teamcode.OpMode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.SubSystems.Sub_DriveTrain_NoPedro;
+import org.firstinspires.ftc.teamcode.SubSystems.Sub_DriveTrain;
+import org.firstinspires.ftc.teamcode.SubSystems.Sub_Intake;
 import org.firstinspires.ftc.teamcode.SubSystems.Sub_Outtake;
 
-@TeleOp(name = "M_Controller_Joystick", group = "Linear OpMode")
+@TeleOp(name="M_Controller", group="Linear OpMode")
 public class M_Controller extends OpMode {
-    Sub_DriveTrain_NoPedro driveTrain;
+    Sub_DriveTrain driveTrain;
+    Sub_Intake intake;
     Sub_Outtake outtake;
 
-    double driveTrainPower = 1;
+    boolean intake_active = false;
+    boolean outtake_active = false;
+
+    double INTAKE_POWER = 0.5;
+    double OUTTAKE_POWER = 0.5;
 
     @Override
     public void init() {
-        driveTrain = new Sub_DriveTrain_NoPedro(hardwareMap);
+        driveTrain = new Sub_DriveTrain(hardwareMap, gamepad1);
+        intake = new Sub_Intake(hardwareMap);
         outtake = new Sub_Outtake(hardwareMap);
     }
 
     @Override
     public void loop() {
-        telemetry.addData("drive train power: ", driveTrainPower);
-        telemetry.addData("outtake direction: ", outtake.getDirection());
-        telemetry.addData("aiming servo position: ", outtake.getAimingServoPosition());
+        driveTrain.drive();
 
-        if (gamepad1.dpad_up) {
-            driveTrain.go_forwards(driveTrainPower);
+        if (gamepad1.touchpadWasPressed()) {
+            driveTrain.snippetGoHome();
         }
 
-        if (gamepad1.dpad_down) {
-            driveTrain.go_backwards(driveTrainPower);
+        if (gamepad1.aWasPressed()) {
+            intake_active = !intake_active;
         }
 
-        if (gamepad1.dpad_right) {
-            driveTrain.go_right(driveTrainPower);
+        if (gamepad1.bWasPressed()) {
+            outtake_active = !outtake_active;
         }
 
-        if (gamepad1.dpad_left) {
-            driveTrain.go_left(driveTrainPower);
+        setSubsystemPowers(intake_active, outtake_active);
+    }
+
+    private void setSubsystemPowers(boolean intake_active, boolean outtake_active) {
+        if (intake_active) {
+            intake.setPower(INTAKE_POWER);
+        } else {
+            intake.setPower(0);
         }
 
-        if (gamepad1.atRest()) {
-            driveTrain.brake();
+        if (outtake_active) {
+            outtake.setPower(OUTTAKE_POWER);
+        } else {
+            intake.setPower(0);
         }
-
-        if (gamepad1.leftBumperWasPressed() && driveTrainPower > 0) {
-            driveTrainPower -= 0.25;
-        }
-
-        if (gamepad1.rightBumperWasPressed() && driveTrainPower < 1) {
-            driveTrainPower += 0.25;
-        }
-
-        if (gamepad1.circleWasPressed()) {
-            outtake.reverseDirection();
-        }
-
-        outtake.setAimingServoPosition(gamepad1.left_stick_y);
-        outtake.setPower(gamepad1.right_stick_y);
-
-        telemetry.update();
     }
 }
