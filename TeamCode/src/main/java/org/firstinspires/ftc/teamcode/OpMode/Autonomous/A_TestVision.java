@@ -34,8 +34,8 @@ public class A_TestVision extends OpMode {
         Point target = vision.getLargestCenter();
 
         if (target != null) {
-            telemetry.addData("Red object X", target.x);
-            telemetry.addData("Red object Y", target.y);
+            telemetry.addData("Object X", target.x);
+            telemetry.addData("Object Y", target.y);
             telemetry.addData("Horizontal error", target.x - 320.0);
 
             speed = ((target.x -320.0) / 320) * 0.75;
@@ -44,7 +44,7 @@ public class A_TestVision extends OpMode {
 
             follower.manual(0.5, 0, -speed);
         } else {
-            telemetry.addLine("No red object detected");
+            telemetry.addLine("No object detected");
 
             intake.setPower(0.0);
 
