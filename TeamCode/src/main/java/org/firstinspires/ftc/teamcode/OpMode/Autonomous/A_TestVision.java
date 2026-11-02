@@ -48,7 +48,7 @@ public class A_TestVision extends OpMode {
 
             intake.setPower(0.0);
 
-            follower.stop();
+            follower.manual(0.1, 0,  0.5);
         }
 
         follower.update();
