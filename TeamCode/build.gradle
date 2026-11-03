@@ -52,4 +52,5 @@ dependencies {
     implementation "org.solverslib:core:0.3.6" // core
 
     implementation("dev.frozenmilk.sinister:Sloth:0.3.2") // Sloth
+    implementation 'com.skeletonarmyftc.marrow:core:1.2.3'
 }
