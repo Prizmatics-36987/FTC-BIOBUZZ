@@ -25,7 +25,10 @@ public class A_TestVision extends OpMode {
         follower = Constants.create(hardwareMap);
         vision = new Sub_Vision();
         intake = new Sub_Intake(hardwareMap);
+    }
 
+    @Override
+    public void start() {
         visionPortal = vision.getVisionPortal(hardwareMap);
     }
 
@@ -48,7 +51,7 @@ public class A_TestVision extends OpMode {
 
             intake.setPower(0.0);
 
-            follower.manual(0.1, 0,  0.5);
+            follower.manual(0, 0,  0.4);
         }
 
         follower.update();
