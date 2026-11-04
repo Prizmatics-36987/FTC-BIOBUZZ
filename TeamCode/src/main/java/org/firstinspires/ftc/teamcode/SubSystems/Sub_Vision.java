@@ -141,7 +141,7 @@ public class Sub_Vision implements VisionProcessor {
 
     public VisionPortal getVisionPortal(HardwareMap hardwareMap) {
         return new VisionPortal.Builder()
-                .setCamera(hardwareMap.get(WebcamName.class, "Webcam 1"))
+                .setCamera(hardwareMap.get(WebcamName.class, "webcam"))
                 .setCameraResolution(new Size(640, 480))
                 .addProcessor(this)
                 .build();
