@@ -30,7 +30,7 @@ public class M_Controller extends OpMode {
     boolean intake_active = false;
     boolean outtake_active = false;
 
-    double INTAKE_POWER = 0.5;
+    double INTAKE_POWER = 1.0;
     double OUTTAKE_POWER = 0.5;
 
     Pose flower1 = poseFactory.of(5, 20, 180);
@@ -63,7 +63,7 @@ public class M_Controller extends OpMode {
 
             speed = ((target.x -320.0) / 320) * 0.75;
 
-            intake.setPower(1.0);
+            intake.setPower(INTAKE_POWER);
 
             follower.manual(0.5, 0, -speed);
         } else {
