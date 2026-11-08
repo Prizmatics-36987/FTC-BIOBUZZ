@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode.OpMode.TeleOp;
 
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -33,12 +36,8 @@ public class M_TestOuttake extends OpMode {
         } else if (gamepad1.leftTriggerWasPressed()) {
             outtake.reverseDirection();
         }
-
-//        if (gamepad1.xWasPressed() && angle <= Servo.MAX_POSITION) {
-//            angle += 0.25;
-//        } else if (gamepad1.yWasPressed() && angle >= Servo.MIN_POSITION) {
-//            angle -= 0.25;
-//        }
+        // safeguard, gamepad input may be delayed at some level
+        power = min(max(MIN_POWER, power),  MAX_POWER);
 
         outtake.setPower(power);
 //        outtake.setAimingServoPosition(angle);

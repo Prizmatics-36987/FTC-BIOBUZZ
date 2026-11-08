@@ -14,6 +14,7 @@ import org.firstinspires.ftc.vision.VisionProcessor;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
+import org.opencv.core.MatOfPoint2f;
 import org.opencv.core.Point;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
@@ -53,6 +54,33 @@ public class Sub_Vision implements VisionProcessor {
 
     @Override
     public Object processFrame(Mat frame, long captureTimeNanos) {
+        //set the points
+        MatOfPoint2f screenPoints = new MatOfPoint2f(
+                new Point(160, 100),
+                new Point(500, 100),
+                new Point(580, 400),
+                new Point(60, 400)
+        );
+
+        MatOfPoint2f destinationPoints = new MatOfPoint2f(
+                new Point(0, 0),
+                new Point(640, 0),
+                new Point(640, 480),
+                new Point(0, 480)
+        );
+
+        Mat M = Imgproc.getPerspectiveTransform(screenPoints, destinationPoints);
+
+        // warp
+        Mat output = new Mat();
+
+        Imgproc.warpPerspective(
+                frame,
+                frame,
+                M,
+                new org.opencv.core.Size(640, 480)
+        );
+        //Imgproc.warpPerspective();
         Imgproc.cvtColor(frame, hsv, Imgproc.COLOR_RGB2HSV);
 
         Core.inRange(hsv, new Scalar(125, 100, 50),
