@@ -25,12 +25,10 @@ public class A_TestVision extends OpMode {
         follower = Constants.create(hardwareMap);
         vision = new Sub_Vision();
         intake = new Sub_Intake(hardwareMap);
-    }
 
-    @Override
-    public void start() {
         visionPortal = vision.getVisionPortal(hardwareMap);
     }
+
 
     @Override
     public void loop() {
@@ -41,17 +39,23 @@ public class A_TestVision extends OpMode {
             telemetry.addData("Object Y", target.y);
             telemetry.addData("Horizontal error", target.x - 320.0);
 
-            speed = ((target.x -320.0) / 320) * 0.75;
+            {
+                telemetry.addLine("No object detected");
+
+                intake.setPower(0.0);
+
+                follower.manual(0, 0,  0.4);
+            }           speed = ((target.x -320.0) / 320) * 0.75;
 
             intake.setPower(1.0);
 
-            follower.manual(0.5, 0, -speed);
+            //follower.manual(0.5, 0, -speed);
         } else {
             telemetry.addLine("No object detected");
 
             intake.setPower(0.0);
 
-            follower.manual(0, 0,  0.4);
+            //follower.manual(0, 0,  0.4);
         }
 
         follower.update();
