@@ -1,10 +1,6 @@
 package org.firstinspires.ftc.teamcode.OpMode.TeleOp;
 
-import com.pedropathing.api.Paths;
-import com.pedropathing.api.PoseFactory;
 import com.pedropathing.follower.Follower;
-import com.pedropathing.math.Pose;
-import com.pedropathing.paths.Path;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -18,7 +14,6 @@ import org.opencv.core.Point;
 
 @TeleOp(name="M_Controller", group="Linear OpMode")
 public class M_Controller extends OpMode {
-    PoseFactory poseFactory = PoseFactory.degrees();
     Follower follower;
     VisionPortal visionPortal;
 
@@ -33,7 +28,6 @@ public class M_Controller extends OpMode {
     double INTAKE_POWER = 1.0;
     double OUTTAKE_POWER = 0.5;
 
-    Pose flower1 = poseFactory.of(5, 20, 180);
     double speed;
 
     @Override
@@ -54,7 +48,6 @@ public class M_Controller extends OpMode {
     @Override
     public void loop() {
         Point target = vision.getLargestCenter();
-        Pose currentPose = follower.pose();
 
         if (target != null && gamepad1.y) {
             telemetry.addData("Object X", target.x);
@@ -82,12 +75,6 @@ public class M_Controller extends OpMode {
                 outtake_active = !outtake_active;
             }
 
-            if (gamepad1.yWasPressed()){
-                if (!follower.isBusy()) {
-                    goFlower(currentPose);
-                }
-            }
-
             setSubsystemPowers(intake_active, outtake_active);
         }
 
@@ -113,11 +100,5 @@ public class M_Controller extends OpMode {
         } else {
             intake.setPower(0);
         }
-    }
-
-    private void goFlower(Pose currentPose) {
-        Path toFlower = Paths.line(currentPose, flower1).linear(currentPose, flower1);
-        follower.follow(toFlower);
-        telemetry.addLine("driving");
     }
 }
