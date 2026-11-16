@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.OpMode.TeleOp;
 
 import com.pedropathing.api.Paths;
 import com.pedropathing.api.PoseFactory;
-import com.pedropathing.follower.Follower;
 import com.pedropathing.math.Pose;
 import com.pedropathing.paths.Path;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -18,106 +17,46 @@ import org.opencv.core.Point;
 
 @TeleOp(name="M_Controller", group="Linear OpMode")
 public class M_Controller extends OpMode {
-    PoseFactory poseFactory = PoseFactory.degrees();
-    Follower follower;
-    VisionPortal visionPortal;
-
     Sub_DriveTrain driveTrain;
     Sub_Intake intake;
     Sub_Outtake outtake;
-    Sub_Vision vision;
 
     boolean intake_active = false;
     boolean outtake_active = false;
 
-    double INTAKE_POWER = 1.0;
-    double OUTTAKE_POWER = 0.5;
-
-    Pose flower1 = poseFactory.of(5, 20, 180);
-    double speed;
+    final double INTAKE_POWER = 0.75;
+    final double OUTTAKE_POWER = 0.75;
 
     @Override
     public void init() {
-        follower = Constants.create(hardwareMap);
-
         driveTrain = new Sub_DriveTrain(hardwareMap, gamepad1);
         intake = new Sub_Intake(hardwareMap);
         outtake = new Sub_Outtake(hardwareMap);
-        vision = new Sub_Vision();
-    }
-
-    @Override
-    public void start() {
-        visionPortal = vision.getVisionPortal(hardwareMap);
     }
 
     @Override
     public void loop() {
-        Point target = vision.getLargestCenter();
-        Pose currentPose = follower.pose();
+        driveTrain.drive();
 
-        if (target != null && gamepad1.y) {
-            telemetry.addData("Object X", target.x);
-            telemetry.addData("Object Y", target.y);
-            telemetry.addData("Horizontal error", target.x - 320.0);
-
-            speed = ((target.x -320.0) / 320) * 0.75;
-
-            intake.setPower(INTAKE_POWER);
-
-            follower.manual(0.5, 0, -speed);
-        } else {
-            follower.stop();
-            driveTrain.drive();
-
-            if (gamepad1.touchpadWasPressed()) {
-                driveTrain.snippetGoHome();
-            }
-
-            if (gamepad1.aWasPressed()) {
-                intake_active = !intake_active;
-            }
-
-            if (gamepad1.bWasPressed()) {
-                outtake_active = !outtake_active;
-            }
-
-            if (gamepad1.yWasPressed()){
-                if (!follower.isBusy()) {
-                    goFlower(currentPose);
-                }
-            }
-
-            setSubsystemPowers(intake_active, outtake_active);
+        if (gamepad1.touchpadWasPressed()) {
+            driveTrain.snippetGoHome();
         }
 
-        follower.update();
-    }
-
-    @Override
-    public void stop() {
-        if (visionPortal != null) {
-            visionPortal.close();
-        }
-    }
-
-    private void setSubsystemPowers(boolean intake_active, boolean outtake_active) {
-        if (intake_active) {
-            intake.setPower(INTAKE_POWER);
-        } else {
-            intake.setPower(0);
+        if (gamepad1.xWasPressed()) {
+            driveTrain.setHome();
         }
 
-        if (outtake_active) {
-            outtake.setPower(OUTTAKE_POWER);
-        } else {
-            intake.setPower(0);
+        if (gamepad1.aWasPressed()) {
+            intake_active = !intake_active;
         }
-    }
 
-    private void goFlower(Pose currentPose) {
-        Path toFlower = Paths.line(currentPose, flower1).linear(currentPose, flower1);
-        follower.follow(toFlower);
-        telemetry.addLine("driving");
+        if (gamepad1.bWasPressed()) {
+            outtake_active = !outtake_active;
+        }
+
+        intake.setPower(intake_active ? INTAKE_POWER : 0);
+        outtake.setPower(outtake_active ? OUTTAKE_POWER : 0);
+
+        driveTrain.update();
     }
 }
