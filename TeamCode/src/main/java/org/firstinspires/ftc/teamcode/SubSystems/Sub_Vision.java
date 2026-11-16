@@ -56,29 +56,26 @@ public class Sub_Vision implements VisionProcessor {
     public Object processFrame(Mat frame, long captureTimeNanos) {
         //set the points
         MatOfPoint2f screenPoints = new MatOfPoint2f(
-                new Point(160, 100),
-                new Point(500, 100),
-                new Point(580, 400),
-                new Point(60, 400)
+                new Point(123, 111),
+                new Point(555, 116),
+                new Point(482, 46),
+                new Point(164, 38)
         );
 
         MatOfPoint2f destinationPoints = new MatOfPoint2f(
-                new Point(0, 0),
-                new Point(640, 0),
-                new Point(640, 480),
-                new Point(0, 480)
+                new Point(123, 462),
+                new Point(555, 462),
+                new Point(555, 30),
+                new Point(123, 30)//432
         );
 
         Mat M = Imgproc.getPerspectiveTransform(screenPoints, destinationPoints);
-
-        // warp
-        Mat output = new Mat();
 
         Imgproc.warpPerspective(
                 frame,
                 frame,
                 M,
-                new org.opencv.core.Size(640, 480)
+                new org.opencv.core.Size(640*2, 480*2)
         );
         //Imgproc.warpPerspective();
         Imgproc.cvtColor(frame, hsv, Imgproc.COLOR_RGB2HSV);
