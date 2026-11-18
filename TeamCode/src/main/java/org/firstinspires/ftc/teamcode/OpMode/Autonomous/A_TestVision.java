@@ -49,13 +49,13 @@ public class A_TestVision extends OpMode {
 
             intake.setPower(1.0);
 
-            //follower.manual(0.5, 0, -speed);
+            follower.manual(0.5, 0, -speed);
         } else {
             telemetry.addLine("No object detected");
 
             intake.setPower(0.0);
 
-            //follower.manual(0, 0,  0.4);
+            follower.manual(0, 0,  0.4);
         }
 
         follower.update();
