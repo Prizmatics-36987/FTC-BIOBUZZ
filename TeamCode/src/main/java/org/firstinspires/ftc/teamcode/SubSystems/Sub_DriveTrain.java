@@ -32,14 +32,15 @@ public class Sub_DriveTrain {
         follower.update();
     }
 
+    public void setHome() {
+        follower.setPose(Pose.zero());
+    }
+
     private DrivePowers getDrivePowers() {
         float forward = -gamepad1.left_stick_y;
         float strafe = -gamepad1.left_stick_x;
         float turn = -gamepad1.right_stick_x;
 
-        if (gamepad1.xWasPressed()) {
-            follower.setPose(Pose.zero());
-        }
 
         DrivePowers drivePowers;
 

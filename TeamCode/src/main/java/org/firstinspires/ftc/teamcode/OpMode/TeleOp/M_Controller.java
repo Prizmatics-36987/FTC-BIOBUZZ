@@ -56,7 +56,5 @@ public class M_Controller extends OpMode {
 
         intake.setPower(intake_active ? INTAKE_POWER : 0);
         outtake.setPower(outtake_active ? OUTTAKE_POWER : 0);
-
-        driveTrain.update();
     }
 }
