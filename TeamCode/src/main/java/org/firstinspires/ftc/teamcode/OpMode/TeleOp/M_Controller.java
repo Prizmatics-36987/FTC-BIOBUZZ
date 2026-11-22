@@ -1,19 +1,11 @@
 package org.firstinspires.ftc.teamcode.OpMode.TeleOp;
 
-import com.pedropathing.api.Paths;
-import com.pedropathing.api.PoseFactory;
-import com.pedropathing.math.Pose;
-import com.pedropathing.paths.Path;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.SubSystems.Sub_DriveTrain;
 import org.firstinspires.ftc.teamcode.SubSystems.Sub_Intake;
 import org.firstinspires.ftc.teamcode.SubSystems.Sub_Outtake;
-import org.firstinspires.ftc.teamcode.SubSystems.Sub_Vision;
-import org.firstinspires.ftc.teamcode.pedro.Constants;
-import org.firstinspires.ftc.vision.VisionPortal;
-import org.opencv.core.Point;
 
 @TeleOp(name="M_Controller", group="Linear OpMode")
 public class M_Controller extends OpMode {
