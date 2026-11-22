@@ -39,14 +39,6 @@ public class A_TestVision extends OpMode {
             telemetry.addData("Object Y", target.y);
             telemetry.addData("Horizontal error", target.x - 320.0);
 
-            {
-                telemetry.addLine("No object detected");
-
-                intake.setPower(0.0);
-
-                follower.manual(0, 0,  0.4);
-            }           speed = ((target.x -320.0) / 320) * 0.75;
-
             intake.setPower(1.0);
 
             follower.manual(0.5, 0, -speed);
