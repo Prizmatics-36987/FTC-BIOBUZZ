@@ -7,10 +7,13 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Sub_Outtake {
     Servo aimingServo;
-    DcMotor motorLeft, motorRight;
+    DcMotor motorLeft, motorRight, turret;
+
+    final int MOTOR_TO_TURRET_RATIO = 10;
 
     public Sub_Outtake(HardwareMap hardwareMap) {
-//        aimingServo = hardwareMap.servo.get("aiming_servo");
+        aimingServo = hardwareMap.servo.get("aiming_servo");
+        turret = hardwareMap.dcMotor.get("turret");
 
         motorLeft = hardwareMap.dcMotor.get("outtake_left");
         motorRight = hardwareMap.dcMotor.get("outtake_right");
@@ -19,6 +22,7 @@ public class Sub_Outtake {
 
         motorLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         motorRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        turret.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
     public void setPower(double power) {
@@ -39,11 +43,19 @@ public class Sub_Outtake {
         setDirection(getDirection().inverted());
     }
 
-//    public void setAimingServoPosition(double position) {
-//        aimingServo.setPosition(position);
-//    }
-//
-//    public double getAimingServoPosition() {
-//        return aimingServo.getPosition();
-//    }
+    public void setAimingServoPosition(double position) {
+        aimingServo.setPosition(position);
+    }
+
+    public double getAimingServoPosition() {
+        return aimingServo.getPosition();
+    }
+
+    public void setTurretPosition(int position) {
+        turret.setTargetPosition(position * MOTOR_TO_TURRET_RATIO);
+    }
+
+    public int getTurretPosition() {
+        return turret.getCurrentPosition();
+    }
 }
