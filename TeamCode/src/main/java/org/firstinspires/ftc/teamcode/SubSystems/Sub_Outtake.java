@@ -11,8 +11,10 @@ public class Sub_Outtake {
 
     final int MOTOR_TO_TURRET_RATIO = 10;
 
+    double ticksPerRevTurret;
+
     public Sub_Outtake(HardwareMap hardwareMap) {
-        aimingServo = hardwareMap.servo.get("aiming_servo");
+//        aimingServo = hardwareMap.servo.get("aiming_servo");
         turret = hardwareMap.dcMotor.get("turret");
 
         motorLeft = hardwareMap.dcMotor.get("outtake_left");
@@ -22,7 +24,8 @@ public class Sub_Outtake {
 
         motorLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         motorRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        turret.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        turret.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        ticksPerRevTurret = turret.getMotorType().getTicksPerRev();
     }
 
     public void setPower(double power) {
@@ -53,6 +56,7 @@ public class Sub_Outtake {
 
     public void setTurretPosition(int position) {
         turret.setTargetPosition(position * MOTOR_TO_TURRET_RATIO);
+        turret.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     public int getTurretPosition() {
